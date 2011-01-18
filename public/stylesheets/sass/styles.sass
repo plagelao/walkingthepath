@@ -1,0 +1,30 @@
+@import mixins.sass
+@import variables.sass
+@import header.sass
+@import options.sass
+@import intro.sass
+@import events.sass
+@import addevent.sass
+
+*
+  margin: 0
+  padding: 0
+
+html
+  width: 100%
+
+body
+  line-height: 1.25
+  width: 100%
+  background-color: $dark_white
+
+.wrapper
+  +row
+  +hn
+  margin: 1em auto 0 auto
+  width: 600px
+  display: block
+  a
+    font-size: 0.9em
+    font-weight: bold
+    color: $dark_gray

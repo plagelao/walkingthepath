@@ -1,0 +1,28 @@
+# SQLite version 3.x
+#   gem install sqlite3-ruby (not necessary on OS X Leopard)
+development:
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test: &test
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
+
+production:
+    adapter: postgresql
+    host: ENV['DATABASE_URL'].split('@')[1].split('/')[0]
+    port: 5432
+    username: ENV['DATABASE_URL'].split('@')[0].split('//')[1].split(':')[0]
+    password: ENV['DATABASE_URL'].split('@')[0].split('//')[1].split(':')[1]
+    database: ENV['DATABASE_URL'].split('@')[1].split('/')[1]
+    encoding: utf8
+
+cucumber:
+  <<: *test

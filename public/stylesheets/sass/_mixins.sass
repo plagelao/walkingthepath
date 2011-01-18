@@ -1,0 +1,31 @@
+=clearfix
+  &:after
+    content: "."
+    display: block
+    height: 0
+    clear: both
+    visibility: hidden
+  overflow: hidden
+  overflow: -moz-scrollbars-none
+  // This makes ie6 get layout
+  display: inline-block
+  // and this puts it back to block
+  &
+    display: block
+
+=row
+  +clearfix
+
+=hn
+  font-family: "HelveticaNeue", "Helvetica Neue", Arial, Helvetica, sans-serif
+  font-weight: normal
+
+=hn_bold
+  font-family: "HelveticaNeue-Bold", "Helvetica Neue Bold", "Helvetica Neue", Arial, Helvetica, sans-serif
+  font-weight: normal
+
+=hn_light
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Arial, Helvetica, sans-serif
+  font-weight: normal
+
+

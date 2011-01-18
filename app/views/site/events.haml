@@ -1,0 +1,36 @@
+.wrapper
+  #intro
+    .wrapper
+      %a{:href => "#"}= "Let's walk the path together!"
+      nace para recopilar los eventos relacionados con el desarrollo de software que van surgiendo por toda España.
+      %br
+      %br
+      ¡Acércate a la comunidad española de desarrolladores!
+
+  #events
+    .wrapper
+      .wrapper
+        - if @events.empty?
+          Ningún evento próximamente :(
+        - else
+          - @events.each do |event|
+            .datebox
+              %span.month
+                #{event.month}
+              %span.day
+                #{event.day}
+              %span.time
+                #{event.hour}
+            .event
+              %a{:href => event.link}= event.title
+
+  #add_event
+    .wrapper
+      Si quieres que un evento aparezca aquí contáctame en
+      %a{:href => "http://twitter.com/"}= "twitter"
+      , soy 
+      %a{:href => "http://twitter.com/plagelao"}= "@plagelao"
+    El único que puede añadir eventos a 
+    %a{:href => "#"}= "Let's walk the path together!"
+    por ahora soy yo, aunque intentaré cambiar ésto lo antes posible
+

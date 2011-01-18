@@ -1,0 +1,13 @@
+!!! HTML
+%html{ "xml:lang" => "en"}
+  %head
+    %title
+      Let's walk the path together!
+    //= stylesheet_link_tag 'styles.css', :cache => true 
+    %link{:rel =>"stylesheet", :href =>"/stylesheets/styles.css", :type => "text/css", :charset => "utf-8" }
+    %meta{"http-equiv" => "Content-Type", :content => "text/html; charset=UTF-8"}
+    %meta{:name => 'description', :content => 'Alberto Peña is an aspiring software craftsmanship'}
+  %body
+    = render :partial => 'header'
+    //= partial(:'shared/menu_bar')
+    = yield

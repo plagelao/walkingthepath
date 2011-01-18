@@ -5,6 +5,7 @@ Given /^"([^"]*)" event the (next|past) week at ([^"]*)$/ do |event, time, hour|
   @event_date = DateTime.now - 7 if time == 'past'
   event = Event.create(@event_date.year, MONTHS[@event_date.month - 1], @event_date.day, hour, event, '#')
   event.save
+  p event.created_at
 end
 
 Given /^"([^"]*)" event the next week at ([^"]*) linked to "([^"]*)"$/ do |event, hour, link|

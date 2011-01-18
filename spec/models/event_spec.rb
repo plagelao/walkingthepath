@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe "site/events.html.erb" do
+describe Event do
   pending "add some examples to (or delete) #{__FILE__}"
 end

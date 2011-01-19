@@ -1,7 +1,8 @@
 atom_feed do |feed|
   feed.title "Let's walh the path together! - Events"
 
-  feed.updated(@events.last.updated_at)
+  latest_event = @events.sort_by(&:updated_at).last
+  feed.updated( latest_event && latest_event.updated_at )
 
   @events.each do |event|
     feed.entry(event) do |entry|

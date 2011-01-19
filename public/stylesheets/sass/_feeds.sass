@@ -1,6 +1,4 @@
-#options
-  padding: 0.1em 0 0 0
-  background-color: $light_sky
+#feeds
   line-height: 1.5
   +clearfix
   .wrapper
@@ -8,16 +6,17 @@
     h1
       +hn
       float: right
-      margin: 0 1em 0 0
       font-size: 1em
       strong
         +hn_bold
         font-style: oblique
         font-weight: bold
-      span.option
+      span.feed
         padding-left: 1em
         a
-          color: white
+          color: $dark_sky
           padding-left: 0
           font-size: 1em
           text-decoration: none
+          img
+            vertical-align: top

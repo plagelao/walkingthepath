@@ -8,3 +8,6 @@ Feature:
     When I ask for the next events as atom feed
     Then I must see "a pair programming session" event at 10:00 the next week in the feed
 
+  Scenario: Can ask for the feed from the event list
+    When I ask for the next events
+    Then I must see an ask for the feed option

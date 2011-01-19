@@ -55,3 +55,9 @@ Then /^I must see "([^"]*)" event at ([^"]*) the next week in the feed$/ do |eve
   page.should have_content(@event_date.day.to_s)
   page.should have_content(MONTHS[@event_date.month - 1].to_s)
 end
+
+Then /^I must see an ask for the feed option$/ do
+  with_scope('#feeds') do
+    all('.feed')[0].all('a')[0][:href].should =~ Regexp.new(Regexp.escape(path_to('the atom feed')))
+  end
+end

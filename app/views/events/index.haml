@@ -9,6 +9,7 @@
 
   #events
     .wrapper
+      = render :partial => 'feed'
       .wrapper
         - if @events.empty?
           Ningún evento próximamente :(

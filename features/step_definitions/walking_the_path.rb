@@ -5,7 +5,6 @@ Given /^"([^"]*)" event the (next|past) week at ([^"]*)$/ do |event, time, hour|
   @event_date = DateTime.now - 7 if time == 'past'
   event = Event.create(@event_date.year, MONTHS[@event_date.month - 1], @event_date.day, hour, event, '#')
   event.save
-  p event.created_at
 end
 
 Given /^"([^"]*)" event the next week at ([^"]*) linked to "([^"]*)"$/ do |event, hour, link|
@@ -16,6 +15,10 @@ end
 
 When /^I ask for the next events$/ do
   visit path_to('the homepage')
+end
+
+When /^I ask for the next events as atom feed$/ do
+  visit path_to('the atom feed')
 end
 
 Then /^the information associated to the "([^"]*)" event must be "([^"]*)"$/ do |event, link|
@@ -44,4 +47,11 @@ Then /^I must see "([^"]*)" event before "([^"]*)" event$/ do |first_event, seco
     all('.event')[0].all('a')[0].text.should == first_event
     all('.event')[1].all('a')[0].text.should == second_event
   end
+end
+
+Then /^I must see "([^"]*)" event at ([^"]*) the next week in the feed$/ do |event, hour|
+  page.should have_content(event)
+  page.should have_content(hour)
+  page.should have_content(@event_date.day.to_s)
+  page.should have_content(MONTHS[@event_date.month - 1].to_s)
 end

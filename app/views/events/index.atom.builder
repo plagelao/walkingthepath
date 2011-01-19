@@ -8,7 +8,6 @@ atom_feed do |feed|
     feed.entry(event) do |entry|
       entry.title(event.title)
       entry.summary(event.when_for_humans)
-      entry.updated(event.when)
       entry.author 'plagelao'
     end
   end

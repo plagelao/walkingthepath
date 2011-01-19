@@ -4,6 +4,7 @@
     %title
       Let's walk the path together!
     //= stylesheet_link_tag 'styles.css', :cache => true 
+    = auto_discovery_link_tag(:atom, "/events.atom")
     %link{:rel =>"stylesheet", :href =>"/stylesheets/styles.css", :type => "text/css", :charset => "utf-8" }
     %meta{"http-equiv" => "Content-Type", :content => "text/html; charset=UTF-8"}
     %meta{:name => 'description', :content => 'Alberto Peña is an aspiring software craftsmanship'}

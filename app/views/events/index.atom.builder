@@ -7,7 +7,7 @@ atom_feed do |feed|
   @events.each do |event|
     feed.entry(event) do |entry|
       entry.title(event.title)
-      entry.summary(event.when_for_humans)
+      entry.summary(event.when)
       entry.author do |author|
         entry.name 'plagelao'
       end

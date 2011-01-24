@@ -17,7 +17,7 @@ When /^I ask for the next events$/ do
   visit path_to('the homepage')
 end
 
-When /^I ask for the next events as atom feed$/ do
+When /^I subscribe to the events update$/ do
   visit path_to('the atom feed')
 end
 
@@ -49,7 +49,7 @@ Then /^I must see "([^"]*)" event before "([^"]*)" event$/ do |first_event, seco
   end
 end
 
-Then /^I must see "([^"]*)" event at ([^"]*) the next week in the feed$/ do |event, hour|
+Then /^I must receive a notification of "([^"]*)" event at ([^"]*) the next week$/ do |event, hour|
   page.should have_content(event)
   page.should have_content(hour)
   page.should have_content(@event_date.day.to_s)

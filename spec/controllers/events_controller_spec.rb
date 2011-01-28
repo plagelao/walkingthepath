@@ -12,15 +12,9 @@ describe EventsController do
 
   describe "GET index" do
     it "assigns all events as @events" do
-      Event.stub(:all) { [mock_event] }
+      Event.stub(:in_the_future) { [mock_event] }
       get :index
       assigns(:events).should eq([mock_event])
-    end
-
-    it "returns only future events ordered by date" do
-      Event.should_receive(:all).with(:conditions => ["date > #{DateTime.now.strftime('%Y%m%d%H%M')}"],
-                                      :order => :date)
-      get :index
     end
   end
 

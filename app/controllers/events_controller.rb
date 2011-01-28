@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   def index
-    @events = Event.all(:conditions => ["date > #{Event.now}"], :order => :date)
+    @events = Event.in_the_future
     respond_to do |format|
       format.html
       format.atom{render :action => 'index', :layout => false}

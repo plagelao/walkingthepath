@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
   MONTHS = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
   DATE_TIME_FORMAT = '%Y%m%d%H%M'
+
   def self.create(year, month, day, time, title, link)
     Event.new(:title => title, :date => date_time(year, month, day, time), :link => link)
   end
@@ -10,6 +11,13 @@ class Event < ActiveRecord::Base
   def self.now
     DateTime.now.strftime(DATE_TIME_FORMAT)
   end
+  def self.in_the_future
+    Event.to_come.ordered_by_date
+  end
+
+  scope :to_come, where("date > :today", :today => Event.now)
+  scope :ordered_by_date, order('date ASC')
+
   def month
     MONTHS[date.to_s.slice(4..5).to_i - 1]
   end

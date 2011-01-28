@@ -118,6 +118,10 @@ GEM
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.24)
+    webrat (0.7.2)
+      nokogiri (>= 1.2.0)
+      rack (>= 1.0)
+      rack-test (>= 0.5.3)
     xpath (0.1.3)
       nokogiri (~> 1.3)
 
@@ -132,3 +136,4 @@ DEPENDENCIES
   rails (= 3.0.3)
   rspec-rails
   sqlite3-ruby
+  webrat

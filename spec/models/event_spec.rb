@@ -18,6 +18,12 @@ describe Event do
 
   it "updates the hour when the date is changed" do
     event.date = 201101121100
-    event.hour.should == '11:00'
+    event.time.should == '11:00'
   end
+
+  it "shows an indefined hour when hour is set to 0000" do
+    event.date = 201101120000
+    event.time.should == '---'
+  end
+
 end

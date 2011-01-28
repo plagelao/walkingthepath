@@ -1,10 +1,9 @@
 class EventsController < ApplicationController
   def index
-    @events = Event.all(:conditions => ["date > #{DateTime.now.strftime('%Y%m%d%H%M')}"], :order => :date)
+    @events = Event.all(:conditions => ["date > #{Event.now}"], :order => :date)
     respond_to do |format|
       format.html
-      format.atom{render :action=>'index',:layout=>false}
-      format.xml { render :xml => @events }
+      format.atom{render :action => 'index', :layout => false}
     end
   end
 

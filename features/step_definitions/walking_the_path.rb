@@ -21,6 +21,22 @@ When /^I subscribe to the events update$/ do
   visit path_to('the atom feed')
 end
 
+When /^I create "([^"]*)" event for the next week at ([^"]*)$/ do |event, hour|
+  pending
+  @event_date = next_week
+  visit path_to('the homepage')
+  with_scope('#new_event') do
+    click_link('new event')
+  end
+  fill_in(:event_title, event)
+  fill_in(:event_date, @event_date)
+  fill_in(:event_link, '')
+  click_button(:new_event)
+  with_scope('#events') do
+    find_link event
+  end
+end
+
 Then /^the information associated to the "([^"]*)" event must be "([^"]*)"$/ do |event, link|
   with_scope('#events') do
     find_link event

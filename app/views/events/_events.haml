@@ -1,0 +1,9 @@
+#events
+  .wrapper
+    = render 'feed'
+    .wrapper
+      - if events.empty?
+        Ningún evento próximamente :(
+      - else
+        - events.each do |event|
+          = render 'event', :event => event

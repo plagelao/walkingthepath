@@ -7,28 +7,7 @@
       %br
       ¡Acércate a la comunidad española de desarrolladores!
 
-  #events
-    .wrapper
-      = render 'feed'
-      .wrapper
-        - if @events.empty?
-          Ningún evento próximamente :(
-        - else
-          - @events.each do |event|
-            .datebox
-              %span.month
-                #{event.month}
-              %span.day
-                #{event.day}
-              %span.time
-                #{event.time}
-            - if event.title.length > 35
-              .event_with_long_title
-                = link_to(event.title, event.link)
-            - if event.title.length <= 35
-              .event_with_short_title
-                = link_to(event.title, event.link)
-
+  = render 'events', :events => @events
 
   #add_event
     .wrapper

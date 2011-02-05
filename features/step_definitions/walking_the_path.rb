@@ -1,15 +1,15 @@
 # encoding: utf-8
 MONTHS = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 Given /^"([^"]*)" event the (next|past) week at ([^"]*)$/ do |event, time, hour|
-  @event_date = DateTime.now + 7 if time == 'next'
-  @event_date = DateTime.now - 7 if time == 'past'
-  event = Event.create(@event_date.year, MONTHS[@event_date.month - 1], @event_date.day, hour, event, '#')
+  @event_date = next_week
+  @event_date = previous_week if time == 'past'
+  event = Event.create(@event_date.year, month_name(@event_date.month), @event_date.day, hour, event, '#')
   event.save
 end
 
 Given /^"([^"]*)" event the next week at ([^"]*) linked to "([^"]*)"$/ do |event, hour, link|
-  @event_date = DateTime.now + 7
-  event = Event.create(@event_date.year, MONTHS[@event_date.month - 1], @event_date.day, hour, event, link)
+  @event_date = next_week
+  event = Event.create(@event_date.year, month_name(@event_date.month), @event_date.day, hour, event, link)
   event.save
 end
 
@@ -53,7 +53,7 @@ Then /^I must receive a notification of "([^"]*)" event at ([^"]*) the next week
   page.should have_content(event)
   page.should have_content(hour)
   page.should have_content(@event_date.day.to_s)
-  page.should have_content(MONTHS[@event_date.month - 1].to_s)
+  page.should have_content(month_name(@event_date.month).to_s)
 end
 
 Then /^I must see an ask for the feed option$/ do

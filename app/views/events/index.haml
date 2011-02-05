@@ -22,8 +22,13 @@
                 #{event.day}
               %span.time
                 #{event.time}
-            .event
-              = link_to(event.title, event.link)
+            - if event.title.length > 35
+              .event_with_long_title
+                = link_to(event.title, event.link)
+            - if event.title.length <= 35
+              .event_with_short_title
+                = link_to(event.title, event.link)
+
 
   #add_event
     .wrapper

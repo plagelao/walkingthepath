@@ -98,20 +98,29 @@
       visibility: hidden; }
     #events .wrapper .wrapper {
       display: block; }
-    #events .wrapper .wrapper .event {
-      width: 430px;
+    #events .wrapper .wrapper .event_with_short_title {
       padding-bottom: 40px;
-      padding-top: 20px; }
-      #events .wrapper .wrapper .event a {
+      padding-top: 20px;
+      width: 400px;
+      padding-left: 100px; }
+      #events .wrapper .wrapper .event_with_short_title a {
         font-size: 1.3em;
         color: #444444;
-        text-decoration: none;
-        padding-left: 30px; }
+        text-decoration: none; }
+    #events .wrapper .wrapper .event_with_long_title {
+      padding-bottom: 50px;
+      padding-top: 10px;
+      width: 400px;
+      padding-left: 100px; }
+      #events .wrapper .wrapper .event_with_long_title a {
+        font-size: 1.3em;
+        color: #444444;
+        text-decoration: none; }
     #events .wrapper .wrapper .datebox {
       float: left;
       width: 70px;
       background-color: #005c99;
-      border: 2px solid #fafafa;
+      border: 2px solid #f9f9f9;
       text-decoration: none;
       color: #005c99;
       display: block;

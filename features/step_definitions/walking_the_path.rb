@@ -39,13 +39,13 @@ Then /^I must see "([^"]*)" event at ([^"]*) the next week$/ do |event, hour|
     page.should have_content(event)
     page.should have_content(hour)
     page.should have_content(@event_date.day.to_s)
-    page.should have_content(MONTHS[@event_date.month - 1].to_s)
+    page.should have_content(month_name(@event_date.month).to_s)
   end
 end
 Then /^I must see "([^"]*)" event before "([^"]*)" event$/ do |first_event, second_event|
   with_scope('#events') do
-    all('.event')[0].all('a')[0].text.should == first_event
-    all('.event')[1].all('a')[0].text.should == second_event
+    all('.event_with_short_title')[0].all('a')[0].text.should == first_event
+    all('.event_with_short_title')[1].all('a')[0].text.should == second_event
   end
 end
 

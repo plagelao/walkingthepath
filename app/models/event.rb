@@ -9,7 +9,7 @@ class Event < ActiveRecord::Base
     DateTime.civil(year, MONTHS.index(month) + 1, day, time[0,2].to_i, time[3,2].to_i).strftime(DATE_TIME_FORMAT)
   end
   def self.now
-    DateTime.now.strftime(DATE_TIME_FORMAT)
+    DateTime.now.strftime(DATE_TIME_FORMAT).to_i
   end
   def self.in_the_future
     Event.to_come.ordered_by_date

@@ -1,29 +1,22 @@
 require 'spec_helper'
 
 describe "events/_event.haml" do
+  let(:event) { mock_model(Event).as_null_object }
 
   it "ask for the event id" do
-    event = mock_model(Event).as_null_object
     event.should_receive(:id)
     render 'events/event', :event => event
   end
 
-  it "ask for the event month" do
-    event = mock_model(Event).as_null_object
-    event.should_receive(:month)
+  it "renders the _date template" do
+    stub_template('events/_event_date.haml' => 'rendering an event date')
     render 'events/event', :event => event
+    rendered.should contain('rendering an event date')
   end
 
-  it "ask for the event day" do
-    event = mock_model(Event).as_null_object
-    event.should_receive(:day)
+  it "renders the _description template" do
+    stub_template('events/_event_description.haml' => 'rendering an event description')
     render 'events/event', :event => event
+    rendered.should contain('rendering an event description')
   end
-
-  it "ask for the event time" do
-    event = mock_model(Event).as_null_object
-    event.should_receive(:time)
-    render 'events/event', :event => event
-  end
-
 end

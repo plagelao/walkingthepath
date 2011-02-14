@@ -98,21 +98,13 @@
       visibility: hidden; }
     #events .wrapper .wrapper {
       display: block; }
-    #events .wrapper .wrapper .event_with_one_line_title {
-      padding-bottom: 40px;
-      padding-top: 20px;
+    #events .wrapper .wrapper .h2 {
+      padding-left: 100px;
       width: 400px;
-      padding-left: 100px; }
-      #events .wrapper .wrapper .event_with_one_line_title a {
-        font-size: 1.3em;
-        color: #444444;
-        text-decoration: none; }
-    #events .wrapper .wrapper .event_with_more_than_one_line_title {
-      padding-bottom: 50px;
-      padding-top: 10px;
-      width: 400px;
-      padding-left: 100px; }
-      #events .wrapper .wrapper .event_with_more_than_one_line_title a {
+      padding-top: 15px;
+      padding-bottom: 45px;
+      text-align: left; }
+      #events .wrapper .wrapper .h2 a {
         font-size: 1.3em;
         color: #444444;
         text-decoration: none; }

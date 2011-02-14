@@ -2,24 +2,26 @@ require 'spec_helper'
 
 describe EventsController do
 
-  def mock_event(stubs={})
-    @mock_event ||= mock_model(Event, stubs).as_null_object
-  end
+  let(:event){ @mock_event = mock_model(Event).as_null_object }
 
   context "index of events" do
+    before do
+      Event.stub(:in_the_future) { [event] }
+    end
     it "assigns all events as @events" do
-      Event.stub(:in_the_future) { [mock_event] }
       get :index
-      assigns(:events).should eq([mock_event])
+      assigns(:events).should eq([event])
     end
   end
 
   context "show an event" do
+    before do
+      Event.stub(:find) { event }
+    end
     it "assigns the requested event as @event" do
-      Event.stub(:find) { mock_event(:id => 37) }
-      mock_event.should_receive(:link).and_return('http://www.google.es')
-      get :show, :id => "37"
+      event.stub(:id).and_return(1234)
+      event.should_receive(:link).and_return('http://www.google.es')
+      get :show, :id => "1234"
     end
   end
-
 end

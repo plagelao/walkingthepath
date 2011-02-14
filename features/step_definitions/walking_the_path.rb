@@ -32,9 +32,6 @@ When /^I create "([^"]*)" event for the next week at ([^"]*)$/ do |event, hour|
   fill_in(:event_date, @event_date)
   fill_in(:event_link, '')
   click_button(:new_event)
-  with_scope('#events') do
-    find_link event
-  end
 end
 
 Then /^the information associated to the "([^"]*)" event must be "([^"]*)"$/ do |event, link|

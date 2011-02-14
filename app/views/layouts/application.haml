@@ -11,4 +11,4 @@
   %body
     = render 'shared/header'
     = yield
-    = render 'shared/analytics' if RAILS_ENV == 'production'
+    = render 'shared/analytics' if Rails.env == 'production'

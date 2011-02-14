@@ -3,29 +3,27 @@ require 'spec_helper'
 
 describe "events/_events.haml" do
   context "no events" do
-
-    before do
-      render 'events/events', :events => []
-    end
+    let(:events) { [] }
 
     it "shows a message" do
+      render 'events/events', :events => []
       rendered.should contain("Ningún evento próximamente :(")
     end
 
     it "does not show any events" do
-      rendered.should_not have_selector('.event')
+      view.should_not_receive(:render).with('event')
+      view.render 'events/events', :events => []
     end
 
   end
 
   context "with events" do
+    let(:events) { [mock_model(Event)] }
 
     it "shows the events when there are some" do
-      event = mock_model(Event).as_null_object
-      event.stub(:id).and_return(0)
-      render 'events/events', :events => [event]
-      rendered.should have_selector('.event')
-      rendered.should have_selector('#event_0')
+      stub_template('events/_event.haml' => 'rendering an event')
+      render 'events/events', :events => events
+      rendered.should contain('rendering an event')
     end
 
   end

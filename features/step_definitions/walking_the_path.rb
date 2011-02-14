@@ -57,8 +57,8 @@ Then /^I must see "([^"]*)" event at ([^"]*) the next week$/ do |event, hour|
 end
 Then /^I must see "([^"]*)" event before "([^"]*)" event$/ do |first_event, second_event|
   with_scope('#events') do
-    all('.event_with_one_line_title')[0].all('a')[0].text.should == first_event
-    all('.event_with_one_line_title')[1].all('a')[0].text.should == second_event
+    all('.h2')[0].all('a')[0].text.should == first_event
+    all('.h2')[1].all('a')[0].text.should == second_event
   end
 end
 

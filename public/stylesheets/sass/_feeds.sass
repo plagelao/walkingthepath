@@ -1,16 +1,15 @@
 #feeds
   line-height: 1.5
   +clearfix
-  .wrapper
-    margin-top: 0 !important
+  .content
+    +row
+    +hn
+    margin: 1em auto 0 auto
+    width: 600px
     h1
       +hn
       float: right
       font-size: 1em
-      strong
-        +hn_bold
-        font-style: oblique
-        font-weight: bold
       span.feed
         padding-left: 1em
         a

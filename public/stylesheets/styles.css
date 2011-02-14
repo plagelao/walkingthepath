@@ -43,26 +43,35 @@
     visibility: hidden; }
   #feeds {
     display: block; }
-  #feeds .wrapper {
-    margin-top: 0 !important; }
-    #feeds .wrapper h1 {
+  #feeds .content {
+    overflow: hidden;
+    overflow: -moz-scrollbars-none;
+    display: inline-block;
+    font-family: "HelveticaNeue", "Helvetica Neue", Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    margin: 1em auto 0 auto;
+    width: 600px; }
+    #feeds .content:after {
+      content: ".";
+      display: block;
+      height: 0;
+      clear: both;
+      visibility: hidden; }
+    #feeds .content {
+      display: block; }
+    #feeds .content h1 {
       font-family: "HelveticaNeue", "Helvetica Neue", Arial, Helvetica, sans-serif;
       font-weight: normal;
       float: right;
       font-size: 1em; }
-      #feeds .wrapper h1 strong {
-        font-family: "HelveticaNeue-Bold", "Helvetica Neue Bold", "Helvetica Neue", Arial, Helvetica, sans-serif;
-        font-weight: normal;
-        font-style: oblique;
-        font-weight: bold; }
-      #feeds .wrapper h1 span.feed {
+      #feeds .content h1 span.feed {
         padding-left: 1em; }
-        #feeds .wrapper h1 span.feed a {
+        #feeds .content h1 span.feed a {
           color: #005c99;
           padding-left: 0;
           font-size: 1em;
           text-decoration: none; }
-          #feeds .wrapper h1 span.feed a img {
+          #feeds .content h1 span.feed a img {
             vertical-align: top; }
 
 #intro .wrapper {
@@ -70,7 +79,10 @@
   font-size: 1.1em;
   color: gray; }
 
-#events .wrapper {
+#events .events {
+  margin: 1em auto 0 auto;
+  width: 600px;
+  display: block;
   width: 590px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -81,54 +93,58 @@
   -webkit-box-shadow: 0 0 5px #005c99;
   -moz-box-shadow: 0 0 5px #005c99;
   border: 1px solid #005c99; }
-  #events .wrapper .wrapper {
+  #events .events .content {
     overflow: hidden;
     overflow: -moz-scrollbars-none;
     display: inline-block;
+    padding-top: 5px;
+    margin: 1em auto 0 auto;
+    width: 600px;
+    display: block;
     border: 0px;
     width: 500px;
     -webkit-box-shadow: 0 0 5px #f9f9f9;
     -moz-box-shadow: 0 0 5px #f9f9f9;
     font-size: 0.9em; }
-    #events .wrapper .wrapper:after {
+    #events .events .content:after {
       content: ".";
       display: block;
       height: 0;
       clear: both;
       visibility: hidden; }
-    #events .wrapper .wrapper {
+    #events .events .content {
       display: block; }
-    #events .wrapper .wrapper .h2 {
+    #events .events .content .event .h2 {
       padding-left: 100px;
       width: 400px;
       padding-top: 15px;
       padding-bottom: 45px;
       text-align: left; }
-      #events .wrapper .wrapper .h2 a {
+      #events .events .content .event .h2 a {
         font-size: 1.3em;
         color: #444444;
         text-decoration: none; }
-    #events .wrapper .wrapper .datebox {
+    #events .events .content .event .event_date {
+      margin-left: 10px;
       float: left;
       width: 70px;
       background-color: #005c99;
       border: 2px solid #f9f9f9;
-      text-decoration: none;
       color: #005c99;
       display: block;
       text-align: center;
       -webkit-border-radius: 5px;
       -moz-border-radius: 5px;
       border-radius: 5px;
-      -webkit-box-shadow: 0 0 5px #005c99;
-      -moz-box-shadow: 0 0 5px #005c99; }
-      #events .wrapper .wrapper .datebox span.month {
+      -webkit-box-shadow: 0 0 10px #005c99;
+      -moz-box-shadow: 0 0 10px #005c99; }
+      #events .events .content .event .event_date span.month {
         color: #f0f0f0;
         font-size: 1.1em; }
-      #events .wrapper .wrapper .datebox span.time {
+      #events .events .content .event .event_date span.time {
         color: #f0f0f0;
         font-size: 0.9em; }
-      #events .wrapper .wrapper .datebox span.day {
+      #events .events .content .event .event_date span.day {
         display: block;
         background-color: #f0f0f0;
         font-size: 1.3em;

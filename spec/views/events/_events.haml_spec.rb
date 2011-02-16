@@ -6,13 +6,13 @@ describe "events/_events.haml" do
     let(:events) { [] }
 
     it "shows a message" do
-      render 'events/events', :events => []
+      render 'events/events', :events => events
       rendered.should contain("Ningún evento próximamente :(")
     end
 
     it "does not show any events" do
       view.should_not_receive(:render).with('event')
-      view.render 'events/events', :events => []
+      view.render 'events/events', :events => events
     end
 
   end
@@ -27,4 +27,5 @@ describe "events/_events.haml" do
     end
 
   end
+
 end

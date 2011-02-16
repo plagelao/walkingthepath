@@ -2,9 +2,6 @@ class Event < ActiveRecord::Base
   MONTHS = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
   DATE_TIME_FORMAT = '%Y%m%d%H%M'
 
-  def self.create(year, month, day, time, title, link)
-    Event.new(:title => title, :date => date_time(year, month, day, time), :link => link)
-  end
   def self.date_time(year, month, day, time)
     DateTime.civil(year, MONTHS.index(month) + 1, day, time[0,2].to_i, time[3,2].to_i).strftime(DATE_TIME_FORMAT)
   end

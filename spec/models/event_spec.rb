@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Event do
-  let(:event){Event.create(2011,'Enero',12,'10:00','title','link')}
+  let(:event){Event.create({:date => 201101121000, :title => 'title', :link => 'link'})}
   it "a new event is created for a specific date" do
     event.date.should == 201101121000
   end

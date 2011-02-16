@@ -24,4 +24,20 @@ describe EventsController do
       get :show, :id => "1234"
     end
   end
+
+  context "adding new events" do
+    it "prepares the new event creation when asked" do
+      get :new
+      assigns(:event).should_not be_nil
+    end
+
+    it "can create new events" do
+      event_data = {'title' => 'a coding dojo', 'link' => 'a link', "date"=>201102152356}
+      transformed_event_data = {:title => 'a coding dojo', :link => 'a link', :date=>201102152356}
+      params = {:event => {'title' => 'a coding dojo', 'link' => 'a link', "date(1i)"=>"2011", "date(2i)"=>"2", "date(3i)"=>"15", "date(4i)"=>"23", "date(5i)"=>"56"}}
+      Event.should_receive(:create).with(transformed_event_data)
+      get :create, params
+      response.should redirect_to(events_path)
+    end
+  end
 end

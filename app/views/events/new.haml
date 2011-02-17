@@ -1,11 +1,18 @@
 = form_for(@event, :url => {:action => 'create'}) do |form|
+  %p
   = form.label(:title, "Evento:")
+  %p
   = form.text_field(:title)
 
-  = form.label(:link, "Link:")
+  %p
+  = form.label(:link, "Enlace a la web del evento:")
+  %p
   = form.text_field(:link)
 
-  = form.label(:date, "Fecha:")
+  %p
+  = form.label(:date, "Fecha del evento:")
+  %p
   = datetime_select('event', 'date', :use_month_numbers => true)
 
+  %p
   = submit_tag('Crear Evento', :id => 'new_event')

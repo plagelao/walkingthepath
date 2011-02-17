@@ -218,3 +218,32 @@ body {
     font-size: 0.9em;
     font-weight: bold;
     color: #666666; }
+
+form {
+  margin-left: 5%;
+  margin-top: 5%;
+  width: 800px;
+  display: block; }
+  form label {
+    width: 12em;
+    float: left;
+    text-align: right;
+    font-size: 1.5em;
+    margin-left: 10%;
+    margin-right: 0.5em;
+    color: #666666;
+    display: block; }
+  form input {
+    font-size: 1.5em;
+    margin-left: 0.5em;
+    margin-bottom: 10px; }
+  form #new_event {
+    margin-left: 85%;
+    margin-top: 10px;
+    line-height: 1.5em;
+    font-size: 1em; }
+  form select {
+    font-size: 1em;
+    margin-left: 0.5em;
+    margin-top: 10px;
+    margin-bottom: 5px; }

@@ -75,6 +75,7 @@
             vertical-align: top; }
 
 #intro .wrapper {
+  margin-bottom: 0;
   padding-bottom: 10px;
   font-size: 1.1em;
   color: gray; }
@@ -86,7 +87,7 @@
   width: 590px;
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: #f9f9f9;
+  background-color: #ffefe5;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -98,13 +99,14 @@
     overflow: -moz-scrollbars-none;
     display: inline-block;
     padding-top: 5px;
+    padding-bottom: 5px;
     margin: 1em auto 0 auto;
     width: 600px;
     display: block;
     border: 0px;
     width: 500px;
-    -webkit-box-shadow: 0 0 5px #f9f9f9;
-    -moz-box-shadow: 0 0 5px #f9f9f9;
+    -webkit-box-shadow: 0 0 5px #ffefe5;
+    -moz-box-shadow: 0 0 5px #ffefe5;
     font-size: 0.9em; }
     #events .events .content:after {
       content: ".";
@@ -129,7 +131,7 @@
       float: left;
       width: 70px;
       background-color: #005c99;
-      border: 2px solid #f9f9f9;
+      border: 2px solid #ffefe5;
       color: #005c99;
       display: block;
       text-align: center;
@@ -159,8 +161,28 @@
   font-size: 0.8em;
   color: gray; }
   #add_event .wrapper {
+    margin-bottom: 0;
     padding-top: 10px;
     padding-bottom: 5px; }
+    #add_event .wrapper #new_event {
+      float: left;
+      width: 160px;
+      height: 20px;
+      background-color: #ff7214;
+      border: 2px solid #d65600;
+      display: block;
+      text-align: center;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 20px;
+      -webkit-box-shadow: 0 0 1px #d65600;
+      -moz-box-shadow: 0 0 1px #d65600;
+      line-height: 1.5em; }
+      #add_event .wrapper #new_event a {
+        font-size: 1.3em;
+        font-weight: bold;
+        color: #ffefe5;
+        text-decoration: none; }
 
 * {
   margin: 0;
@@ -180,7 +202,7 @@ body {
   display: inline-block;
   font-family: "HelveticaNeue", "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-weight: normal;
-  margin: 1em auto 0 auto;
+  margin: 1em auto 5em auto;
   width: 600px;
   display: block; }
   .wrapper:after {

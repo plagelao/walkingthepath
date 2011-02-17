@@ -168,7 +168,7 @@
     #add_event .wrapper #new_event {
       float: left;
       width: 160px;
-      height: 20px;
+      height: 30px;
       background-color: #ff7214;
       border: 2px solid #d65600;
       display: block;
@@ -178,7 +178,7 @@
       border-radius: 20px;
       -webkit-box-shadow: 0 0 1px #d65600;
       -moz-box-shadow: 0 0 1px #d65600;
-      line-height: 1.5em; }
+      line-height: 2em; }
       #add_event .wrapper #new_event a {
         font-size: 1.3em;
         font-weight: bold;

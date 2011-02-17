@@ -14,6 +14,7 @@
   #header {
     display: block; }
   #header .wrapper {
+    margin-bottom: 0 !important;
     margin-top: 0 !important; }
     #header .wrapper h1 {
       font-family: "HelveticaNeue", "Helvetica Neue", Arial, Helvetica, sans-serif;

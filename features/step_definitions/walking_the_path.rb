@@ -1,9 +1,9 @@
 # encoding: utf-8
 Given /^"([^"]*)" event the (next|past) week at ([^"]*)$/ do |title, time, hour|
-  @event_date = next_week
-  @event_date = previous_week if time == 'past'
+  @event_date = next_week(hour)
+  @event_date = previous_week(hour) if time == 'past'
   event = Event.new
-  event.date = Event.date_time(@event_date.year, month_name(@event_date.month), @event_date.day, hour)
+  event.date = @event_date
   event.title = title
   event.link = '#'
   event.save
@@ -12,7 +12,7 @@ end
 Given /^"([^"]*)" event the next week at ([^"]*) linked to "([^"]*)"$/ do |title, hour, link|
   @event_date = next_week
   event = Event.new
-  event.date = Event.date_time(@event_date.year, month_name(@event_date.month), @event_date.day, hour)
+  event.date = @event_date.to_i
   event.title = title
   event.link = link
   event.save
@@ -34,7 +34,7 @@ When /^I create "([^"]*)" event for the next week at ([^"]*)$/ do |event, time|
   end
   fill_in('event_title', :with => event)
   select(@event_date.year.to_s, :from =>'event_date_1i')
-  select(@event_date.month.to_s, :from =>'event_date_2i')
+  select(month_number_in(@event_date).to_s, :from =>'event_date_2i')
   select(@event_date.day.to_s, :from =>'event_date_3i')
   select(time.split(':')[0], :from =>'event_date_4i')
   select(time.split(':')[1], :from =>'event_date_5i')
@@ -60,7 +60,7 @@ Then /^I must see "([^"]*)" event at ([^"]*) the next week$/ do |event, hour|
     page.should have_content(event)
     page.should have_content(hour)
     page.should have_content(@event_date.day.to_s)
-    page.should have_content(month_name(@event_date.month).to_s)
+    page.should have_content(@event_date.month.to_s)
   end
 end
 Then /^I must see "([^"]*)" event before "([^"]*)" event$/ do |first_event, second_event|
@@ -74,7 +74,7 @@ Then /^I must receive a notification of "([^"]*)" event at ([^"]*) the next week
   page.should have_content(event)
   page.should have_content(hour)
   page.should have_content(@event_date.day.to_s)
-  page.should have_content(month_name(@event_date.month).to_s)
+  page.should have_content(@event_date.month.to_s)
 end
 
 Then /^I must see an ask for the feed option$/ do

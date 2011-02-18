@@ -1,40 +1,32 @@
 class Event < ActiveRecord::Base
-  MONTHS = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-  DATE_TIME_FORMAT = '%Y%m%d%H%M'
 
-  def self.date_time(year, month, day, time)
-    DateTime.civil(year, MONTHS.index(month) + 1, day, time[0,2].to_i, time[3,2].to_i).strftime(DATE_TIME_FORMAT)
-  end
-  def self.now
-    DateTime.now.strftime(DATE_TIME_FORMAT).to_i
-  end
   def self.in_the_future
     Event.to_come.ordered_by_date
   end
 
-  scope :to_come, where("date > :today", :today => Event.now)
+  scope :to_come, where("date > :today", :today => EventDate.now)
   scope :ordered_by_date, order('date ASC')
 
   def month
-    MONTHS[date.to_s.slice(4..5).to_i - 1]
+    datetime.month
   end
+
   def day
-    date.to_s.slice(6..7).to_i
+    datetime.day
   end
+
   def time
-    return '---' if undetermined_hour?
-    "#{hours}:#{minutes}"
+    datetime.time
   end
-  def undetermined_hour?
-    date.to_s.slice(8..11).to_i == 0
-  end
-  def hours
-    date.to_s.slice(8..9)
-  end
-  def minutes
-    date.to_s.slice(10..11)
-  end
+
   def when
     "#{day} de #{month} a las #{time}"
   end
+
+  private
+
+  def datetime
+    EventDate.new(date)
+  end
+
 end

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def authentication
-    puts request.env["ominauth.auth"].inspect
+    raise 'Erroraco' if request.env["ominauth.auth"].nil?
     redirect_to events_path
   end
 

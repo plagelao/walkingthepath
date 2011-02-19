@@ -83,7 +83,7 @@
   color: gray; }
 
 #events .events {
-  margin: 1em auto 0 auto;
+  margin: 1em auto 1em auto;
   width: 600px;
   display: block;
   width: 590px;
@@ -103,12 +103,8 @@
     padding-top: 5px;
     padding-bottom: 5px;
     margin: 1em auto 0 auto;
-    width: 600px;
-    display: block;
     border: 0px;
     width: 500px;
-    -webkit-box-shadow: 0 0 5px #f9f9f9;
-    -moz-box-shadow: 0 0 5px #f9f9f9;
     font-size: 0.9em; }
     #events .events .content:after {
       content: ".";
@@ -131,7 +127,7 @@
     #events .events .content .event .event_date {
       margin-left: 10px;
       float: left;
-      width: 70px;
+      width: 75px;
       background-color: #005c99;
       border: 2px solid #f9f9f9;
       color: #005c99;

@@ -1,4 +1,11 @@
 # encoding: utf-8
+Before do
+  WebMock.disable_net_connect!(:allow => "localhost:3000")
+  WebMock.reset!
+  stub_request(:post, "https://api.twitter.com/oauth/request_token").
+  to_return(:status => 200, :body => "", :headers => {})
+end
+
 Given /^"([^"]*)" event the (next|past) week at ([^"]*)$/ do |title, time, hour|
   @event_date = next_week(hour)
   @event_date = previous_week(hour) if time == 'past'
@@ -42,6 +49,12 @@ When /^I create "([^"]*)" event for the next week at ([^"]*)$/ do |event, time|
   click_button('Crear')
 end
 
+When /^I identify myself as "([^"]*)"$/ do |user_name|
+  within('#sign_in') do
+    click_link("Identificarse desde twitter")
+  end
+end
+
 Then /^the information associated to the "([^"]*)" event must be "([^"]*)"$/ do |event, link|
   within('#events') do
     find_link event
@@ -81,4 +94,8 @@ Then /^I must see an ask for the feed option$/ do
   within('#feeds') do
     all('.feed')[0].all('a')[0][:href].should =~ Regexp.new(Regexp.escape(path_to('the atom feed')))
   end
+end
+
+Then /^I get a personal message for "([^"]*)"$/ do |user_name|
+  page.should have_content("Hola, #{user_name}")
 end

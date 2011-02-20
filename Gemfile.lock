@@ -83,7 +83,6 @@ GEM
     childprocess (0.1.7)
       ffi (~> 0.6.3)
     configuration (1.2.0)
-    crack (0.1.8)
     cucumber (0.10.0)
       builder (>= 2.1.2)
       diff-lcs (~> 1.1.2)
@@ -182,9 +181,6 @@ GEM
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.24)
-    webmock (1.6.2)
-      addressable (>= 2.2.2)
-      crack (>= 0.1.7)
     webrat (0.7.3)
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
@@ -204,5 +200,4 @@ DEPENDENCIES
   rails (= 3.0.3)
   rspec-rails
   sqlite3-ruby
-  webmock
   webrat

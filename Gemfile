@@ -13,5 +13,4 @@ group :development, :test do
   gem 'capybara'
   gem 'launchy'
   gem 'webrat'
-  gem 'webmock'
 end

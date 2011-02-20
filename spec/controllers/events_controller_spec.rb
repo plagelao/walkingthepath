@@ -35,7 +35,8 @@ describe EventsController do
       event_data = {'title' => 'a coding dojo', 'link' => 'a link', "date"=>201102152356}
       transformed_event_data = {:title => 'a coding dojo', :link => 'a link', :date=>201102152356}
       params = {:event => {'title' => 'a coding dojo', 'link' => 'a link', "date(1i)"=>"2011", "date(2i)"=>"2", "date(3i)"=>"15", "date(4i)"=>"23", "date(5i)"=>"56"}}
-      Event.should_receive(:create).with(transformed_event_data)
+      Event.should_receive(:new).with(transformed_event_data).and_return(event)
+      event.should_receive(:save)
       get :create, params
       response.should redirect_to(events_path)
     end

@@ -20,7 +20,8 @@ class EventsController < ApplicationController
     transformed_event_data[:title] = event_data['title']
     transformed_event_data[:link] = event_data['link']
     transformed_event_data[:date] = to_event_date event_data
-    Event.create transformed_event_data
+    event = Event.new transformed_event_data
+    event.save
     redirect_to events_path
   end
 

@@ -7,7 +7,7 @@ describe "events/_authentication.haml" do
     it "shows an option to sign in" do
       session[:user_id] = nil
       render 'events/authentication'
-      rendered.should contain("Identifícate desde twitter")
+      rendered.should contain("Identifícate con twitter")
     end
 
   end
@@ -23,13 +23,13 @@ describe "events/_authentication.haml" do
 
     it "does not show an option to sign in" do
       render 'events/authentication'
-      rendered.should_not contain("Identifícate desde twitter")
+      rendered.should_not contain("Identifícate con twitter")
     end
 
-    it "shows a greeting message" do
+    it "shows the user name" do
       user.stub(:name).and_return('Alberto')
       render 'events/authentication'
-      rendered.should contain("Hola, Alberto")
+      rendered.should =~ /Alberto/
     end
   end
 

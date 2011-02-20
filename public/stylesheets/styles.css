@@ -211,6 +211,38 @@ form {
     margin-top: 10px;
     margin-bottom: 5px; }
 
+#signed_in {
+  padding: 0.1em 0 0 0;
+  background-color: #8ec1da; }
+  #signed_in .wrapper {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0; }
+    #signed_in .wrapper p {
+      font-size: 0.8em;
+      margin: 0 1em 0 0;
+      float: right;
+      color: #f0f0f0; }
+      #signed_in .wrapper p span {
+        font-size: 1.1em; }
+
+#sign_in {
+  padding: 0.1em 0 0 0;
+  background-color: #f6a532; }
+  #sign_in .wrapper {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0; }
+    #sign_in .wrapper p {
+      font-size: 0.9em;
+      margin: 0 1em 0 0;
+      float: right;
+      color: #99000f; }
+      #sign_in .wrapper p a {
+        font-size: 1.2em;
+        color: #99000f;
+        text-decoration: none; }
+
 * {
   margin: 0;
   padding: 0; }

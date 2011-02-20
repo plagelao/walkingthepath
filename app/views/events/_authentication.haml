@@ -1,9 +1,14 @@
-#sign_in
-  - if session[:user_id].nil?
-    %p
-      ¿Quieres crear un nuevo evento?
-      = link_to("Identifícate desde twitter", "/auth/twitter")
-  - else
-    - user_name = User.find(session[:user_id]).name
-    %p
-      = "Hola, #{user_name}"
+- if session[:user_id].nil?
+  %header#sign_in
+    .wrapper
+      %p
+        ¿Quieres crear un nuevo evento?
+        = link_to("Identifícate con twitter", "/auth/twitter")
+-else
+  %header#signed_in
+    .wrapper
+      - user_name = User.find(session[:user_id]).name
+      %p
+        Bienvenido, 
+        %span
+          = user_name

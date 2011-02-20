@@ -1,0 +1,9 @@
+#sign_in
+  - if session[:user_id].nil?
+    %p
+      ¿Quieres crear un nuevo evento?
+      = link_to("Identifícate desde twitter", "/auth/twitter")
+  - else
+    - user_name = User.find(session[:user_id]).name
+    %p
+      = "Hola, #{user_name}"

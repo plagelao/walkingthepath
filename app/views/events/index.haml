@@ -1,4 +1,5 @@
 .wrapper
+  = render 'authentication'
   #intro
     .wrapper
       = link_to("Let's walk the path together!", '')
@@ -7,7 +8,5 @@
       %br
       ¡Acércate a la comunidad española de desarrolladores!
 
+  = render 'new_event' unless session[:user_id].nil?
   = render 'events', :events => @events
-//  #sign_in
-//    = link_to("Identificarse desde twitter", "/auth/twitter")
-//  = render 'new_event'

@@ -14,12 +14,14 @@ Feature:
     And I ask for the next events
     Then I must see "a pair programming session" event at 10:00 the next week
 
+  @wip
   Scenario: create an event without an event name
     Given I ask for the next events
     And I identify myself as "Alberto"
     When I create an event without name
     Then I get an error
 
+  @wip
   Scenario: create an event without an event link
     Given I ask for the next events
     And I identify myself as "Alberto"

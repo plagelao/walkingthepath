@@ -20,6 +20,7 @@ Feature:
     When I ask for the next events
     Then I am not able to sign in again
 
+  @wip
   Scenario: Can sign out if signed in
     Given I ask for the next events
     And I identify myself as "Alberto"

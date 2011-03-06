@@ -1,0 +1,10 @@
+=gradient(!top, !bottom)
+    background-image: -moz-linear-gradient(top, !top, !bottom)
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, !top),color-stop(1, !bottom))
+    background-image: -webkit-linear-gradient(!top, !bottom)
+    background-image: linear-gradient(top, !top, !bottom)
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='!top', EndColorStr='!bottom')
+
+=shadow(!x, !y, !size, !color)
+    -webkit-box-shadow: !x !y !size !color
+    -moz-box-shadow: !x !y !size !color

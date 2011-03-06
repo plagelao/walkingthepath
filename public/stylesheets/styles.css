@@ -1,6 +1,6 @@
 #header {
   padding: 0.1em 0 0 0;
-  background-color: #005c99;
+  background-color: black;
   line-height: 2.5;
   overflow: hidden;
   overflow: -moz-scrollbars-none;
@@ -17,17 +17,12 @@
     margin-bottom: 0 !important;
     margin-top: 0 !important; }
     #header .wrapper h1 {
-      font-family: "HelveticaNeue", "Helvetica Neue", Arial, Helvetica, sans-serif;
+      font-family: Monaco;
       font-weight: normal;
       color: white;
-      float: right;
+      float: left;
       margin: 0 1em 0 0;
       font-size: 1.5em; }
-      #header .wrapper h1 strong {
-        font-family: "HelveticaNeue-Bold", "Helvetica Neue Bold", "Helvetica Neue", Arial, Helvetica, sans-serif;
-        font-weight: normal;
-        font-style: oblique;
-        font-weight: bold; }
     #header .wrapper img {
       display: block; }
 
@@ -50,8 +45,7 @@
     display: inline-block;
     font-family: "HelveticaNeue", "Helvetica Neue", Arial, Helvetica, sans-serif;
     font-weight: normal;
-    margin: 1em auto 0 auto;
-    width: 600px; }
+    margin: 1em auto 0 auto; }
     #feeds .content:after {
       content: ".";
       display: block;
@@ -68,7 +62,7 @@
       #feeds .content h1 span.feed {
         padding-left: 1em; }
         #feeds .content h1 span.feed a {
-          color: #005c99;
+          color: #444444;
           padding-left: 0;
           font-size: 1em;
           text-decoration: none; }
@@ -83,28 +77,22 @@
   color: gray; }
 
 #events .events {
-  margin: 1em auto 1em auto;
-  width: 600px;
+  margin: 1em 1em 1em 0em;
   display: block;
-  width: 590px;
   padding-top: 10px;
   padding-bottom: 10px;
   background-color: #f9f9f9;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  -webkit-box-shadow: 0 0 5px #005c99;
-  -moz-box-shadow: 0 0 5px #005c99;
-  border: 1px solid #005c99; }
+  -webkit-box-shadow: 0 0 5px black;
+  -moz-box-shadow: 0 0 5px black;
+  border: 1px solid black; }
   #events .events .content {
     overflow: hidden;
     overflow: -moz-scrollbars-none;
     display: inline-block;
     padding-top: 5px;
     padding-bottom: 5px;
-    margin: 1em auto 0 auto;
+    margin: 1em 5em 0 5em;
     border: 0px;
-    width: 500px;
     font-size: 0.9em; }
     #events .events .content:after {
       content: ".";
@@ -114,46 +102,65 @@
       visibility: hidden; }
     #events .events .content {
       display: block; }
-    #events .events .content .event .h2 {
-      padding-left: 100px;
-      width: 400px;
-      padding-top: 15px;
-      padding-bottom: 45px;
-      text-align: left; }
-      #events .events .content .event .h2 a {
-        font-size: 1.3em;
-        color: #444444;
-        text-decoration: none; }
-    #events .events .content .event .event_date {
-      margin-left: 10px;
-      float: left;
-      width: 75px;
-      background-color: #005c99;
-      border: 2px solid #f9f9f9;
-      color: #005c99;
-      display: block;
-      text-align: center;
-      -webkit-border-radius: 5px;
-      -moz-border-radius: 5px;
-      border-radius: 5px;
-      -webkit-box-shadow: 0 0 10px #005c99;
-      -moz-box-shadow: 0 0 10px #005c99; }
-      #events .events .content .event .event_date span.month {
-        color: #f0f0f0;
-        font-size: 1.1em; }
-      #events .events .content .event .event_date span.time {
-        color: #f0f0f0;
-        font-size: 0.9em; }
-      #events .events .content .event .event_date span.day {
+    #events .events .content .event {
+      overflow: hidden;
+      overflow: -moz-scrollbars-none;
+      display: inline-block;
+      margin: 1em 0em 0 auto;
+      border: 1px solid black;
+      font-size: 0.9em;
+      background-color: white;
+      background-image: -moz-linear-gradient(top, white, #e0e0e0);
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, white), color-stop(1, #e0e0e0));
+      background-image: -webkit-linear-gradient(white, #e0e0e0);
+      background-image: linear-gradient(top, white, #e0e0e0);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='!top', EndColorStr='!bottom'); }
+      #events .events .content .event:after {
+        content: ".";
         display: block;
-        background-color: #f0f0f0;
-        font-size: 1.3em;
-        line-height: 1.2em;
-        font-weight: bold;
-        margin: 0 3px 3px;
-        -webkit-border-radius: 2px;
-        -moz-border-radius: 2px;
-        border-radius: 2px; }
+        height: 0;
+        clear: both;
+        visibility: hidden; }
+      #events .events .content .event {
+        display: block; }
+      #events .events .content .event .h2 {
+        padding-left: 10em;
+        padding-top: 0.5em;
+        text-align: left; }
+        #events .events .content .event .h2 a {
+          font-size: 2.3em;
+          color: #444444;
+          text-decoration: none; }
+      #events .events .content .event .event_date {
+        margin-top: 1em;
+        margin-bottom: 0.5em;
+        margin-left: 1em;
+        float: left;
+        width: 80px;
+        display: block;
+        text-align: center; }
+        #events .events .content .event .event_date .calendar_date {
+          border: 1px solid black;
+          background-color: white; }
+          #events .events .content .event .event_date .calendar_date span.month {
+            display: block;
+            background-color: #b13637;
+            color: white;
+            font-size: 1.1em;
+            line-height: 1.7em; }
+          #events .events .content .event .event_date .calendar_date span.day {
+            display: block;
+            background-color: white;
+            color: #1c1c1c;
+            font-size: 3em;
+            line-height: 1.2em;
+            font-weight: bold;
+            margin: 0 3px 3px; }
+        #events .events .content .event .event_date .time {
+          background-color: #e0e0e0;
+          color: #1c1c1c;
+          font-size: 0.9em;
+          margin-top: 0.5em; }
 
 #add_event {
   font-size: 0.8em;
@@ -230,8 +237,7 @@ form {
   padding: 0.1em 0 0 0;
   background-color: #f6a532; }
   #sign_in .wrapper {
-    margin-top: 0;
-    margin-bottom: 0;
+    margin: 0 0 0 1em;
     padding-bottom: 0; }
     #sign_in .wrapper p {
       font-size: 0.9em;
@@ -261,8 +267,7 @@ body {
   display: inline-block;
   font-family: "HelveticaNeue", "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-weight: normal;
-  margin: 1em auto 5em auto;
-  width: 600px;
+  margin: 1em auto 5em 1em;
   display: block; }
   .wrapper:after {
     content: ".";

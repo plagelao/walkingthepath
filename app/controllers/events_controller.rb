@@ -1,4 +1,7 @@
 class EventsController < ApplicationController
+
+  before_filter :assert_user_is_authenticated, :only => [:new, :create]
+
   def index
     @events = Event.in_the_future
     respond_to do |format|
@@ -14,6 +17,7 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
   end
+
   def create
     event_data = params[:event]
     transformed_event_data = {}
@@ -35,5 +39,13 @@ class EventsController < ApplicationController
       date += number
     end
     date.to_i
+  end
+
+  def user_logged_in?
+    not session[:user_id].blank?
+  end
+
+  def assert_user_is_authenticated
+    redirect_to events_path unless user_logged_in?
   end
 end

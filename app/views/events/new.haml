@@ -1,6 +1,6 @@
 - unless notice.nil?
   - errors = notice.map(&:downcase).join(' Además, ')
-  - errors[0] = errors.slice(0).capitalize
+  - errors[0] = errors.slice(0,1).capitalize
   #notice= errors
 = form_for(@event, :url => {:action => 'create'}) do |form|
   %p

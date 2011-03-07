@@ -6,7 +6,7 @@ Given /^"([^"]*)" event the (next|past) week at ([^"]*)$/ do |title, time, hour|
   event = Event.new
   event.date = @event_date
   event.title = title
-  event.link = '#'
+  event.link = 'http://Alink.es'
   event.save
 end
 

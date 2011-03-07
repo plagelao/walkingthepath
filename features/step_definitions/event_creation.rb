@@ -1,32 +1,26 @@
 #encoding: utf-8
 When /^I create "([^"]*)" event for the next week at ([^"]*)$/ do |event, time|
-  @event_date = next_week
-  visit path_to('the homepage')
-  within('#add_event') do
-    click_link("Añadir un evento")
-  end
+  visit_create_an_event
   fill_in('event_title', :with => event)
-  select(@event_date.year.to_s, :from =>'event_date_1i')
-  select(month_number_in(@event_date).to_s, :from =>'event_date_2i')
-  select(@event_date.day.to_s, :from =>'event_date_3i')
-  select(time.split(':')[0], :from =>'event_date_4i')
-  select(time.split(':')[1], :from =>'event_date_5i')
-  fill_in('event_link', :with => '')
+  set_next_week_as_event_date
+  set_event_time_as time
+  fill_in('event_link', :with => 'http://Alink.es')
   click_button('Crear')
 end
 
-When /^I create an event without name$/ do
-  @event_date = next_week
-  visit path_to('the homepage')
-  within('#add_event') do
-    click_link("Añadir un evento")
-  end
-  select(@event_date.year.to_s, :from =>'event_date_1i')
-  select(month_number_in(@event_date).to_s, :from =>'event_date_2i')
-  select(@event_date.day.to_s, :from =>'event_date_3i')
-  select(time.split(':')[0], :from =>'event_date_4i')
-  select(time.split(':')[1], :from =>'event_date_5i')
-  fill_in('event_link', :with => '')
+When /^I create an event without title$/ do
+  visit_create_an_event
+  set_next_week_as_event_date
+  set_event_time_as '10:30'
+  fill_in('event_link', :with => 'http://Alink.es')
+  click_button('Crear')
+end
+
+When /^I create an event without link$/ do
+  visit_create_an_event
+  fill_in('event_title', :with => 'A title')
+  set_next_week_as_event_date
+  set_event_time_as '10:30'
   click_button('Crear')
 end
 
@@ -34,6 +28,10 @@ Then /^I am not able to create new events$/ do
   page.should_not have_content("Añadir un evento")
 end
 
-Then /^I get an error$/ do
-  page.should have_content("El evento necesita un título. No seas vaguete y pónselo.")
+Then /^I get notified about the need to fill the event title$/ do
+  page.should have_content("No seas vaguete y ponle un título al evento.")
+end
+
+Then /^I get notified about the need to fill the event link$/ do
+  page.should have_content("Seguro que tienes un enlace a la descripción del evento por algún lado.")
 end

@@ -261,6 +261,12 @@ body {
   width: 100%;
   background-color: #f0f0f0; }
 
+#notice {
+  color: red;
+  font-size: 1.4em;
+  text-align: center;
+  margin-top: 2em; }
+
 .wrapper {
   overflow: hidden;
   overflow: -moz-scrollbars-none;

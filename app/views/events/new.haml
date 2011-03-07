@@ -1,3 +1,7 @@
+- unless notice.nil?
+  - errors = notice.map(&:downcase).join(' Además, ')
+  - errors[0] = errors[0].capitalize
+  #notice= errors
 = form_for(@event, :url => {:action => 'create'}) do |form|
   %p
   = form.label(:title, "Evento:")
@@ -16,3 +20,4 @@
 
   %p
   = submit_tag('Crear Evento', :id => 'new_event')
+

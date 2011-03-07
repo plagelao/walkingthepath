@@ -1,3 +1,4 @@
+#encoding: utf-8
 class EventsController < ApplicationController
 
   before_filter :assert_user_is_authenticated, :only => [:new, :create]
@@ -19,20 +20,24 @@ class EventsController < ApplicationController
   end
 
   def create
-    event_data = params[:event]
-    transformed_event_data = {}
-    transformed_event_data[:title] = event_data['title']
-    transformed_event_data[:link] = event_data['link']
-    transformed_event_data[:date] = to_event_date event_data
-    event = Event.new transformed_event_data
-    event.save
-    redirect_to events_path
+    @event = create_event_from params[:event]
+    return redirect_to events_path if @event.save
+    flash[:notice] = []
+    flash[:notice] << @event.errors[:title].first unless @event.errors[:title].empty?
+    flash[:notice] << @event.errors[:link].first unless @event.errors[:link].empty?
+    redirect_to new_event_path
   end
 
   private
 
-  def to_event_date(datetime_from_select)
-    date = ''
+  def create_event_from(event_data, transformed_event_data = {})
+    transformed_event_data[:title] = event_data['title']
+    transformed_event_data[:link] = event_data['link']
+    transformed_event_data[:date] = to_event_date event_data
+    Event.new transformed_event_data
+  end
+
+  def to_event_date(datetime_from_select, date = '')
     5.times do |index|
       number = datetime_from_select["date(#{index+1}i)"]
       number = '0'+number if number.length == 1

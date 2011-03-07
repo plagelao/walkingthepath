@@ -1,8 +1,11 @@
+#encoding: utf-8
 require 'spec_helper'
 
 describe Event do
-  let(:event){Event.create({:date => 201101121000, :title => 'title', :link => 'link'})}
-  it "a new event is created for a specific date" do
+
+  let(:event){Event.new({:date => 201101121000, :title => 'title', :link => 'link'})}
+
+  it "is created for a specific date" do
     event.date.should == 201101121000
   end
 
@@ -26,4 +29,21 @@ describe Event do
     event.time.should == '---'
   end
 
+  context "validates" do
+
+    it "that has a title" do
+      event.title = nil
+      expect{event.save!}.to raise_error(/No seas vaguete y ponle un título al evento/)
+    end
+
+    it "that has a link" do
+      event.link = nil
+      expect{event.save!}.to raise_error(/Seguro que tienes un enlace a la descripción del evento por algún lado./)
+    end
+
+    it "that has a valid link" do
+      event.link = 'not a url'
+      expect{event.save!}.to raise_error(/Creo que el enlace que has escrito no es correcto. ¡Casi lo tienes!/)
+    end
+  end
 end

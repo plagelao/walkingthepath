@@ -45,5 +45,10 @@ describe Event do
       event.link = 'not a url'
       expect{event.save!}.to raise_error(/Creo que el enlace que has escrito no es correcto. ¡Casi lo tienes!/)
     end
+
+    it "that has a valid link even if it is secure" do
+      event.link = 'https://www.google.es'
+      expect{event.save!}.to_not raise_error
+    end
   end
 end

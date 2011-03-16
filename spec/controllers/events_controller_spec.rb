@@ -29,7 +29,7 @@ describe EventsController do
     before do
       Event.stub(:find => event)
     end
-    
+
     it "that already exists in the system" do
       Event.should_receive(:find).with(1234).and_return(event)
       get :show, :id => 1234
@@ -91,7 +91,7 @@ describe EventsController do
 
         it "stays in the create form" do
           get :create, params
-          response.should redirect_to(new_event_path)
+          response.should render_template(:new)
         end
 
         it "shows an error" do
@@ -107,7 +107,7 @@ describe EventsController do
   context "if the user is not authenticated" do
 
     let(:params) { {:event => {'title' => 'a coding dojo', 'link' => 'a link', 'date(1i)'=>'2011', 'date(2i)'=>'2', 'date(3i)'=>'15', 'date(4i)'=>'23', 'date(5i)'=>'56'}} }
-    
+
     it "does not allow the creation of new events" do
       get :new
       response.should redirect_to(events_path)

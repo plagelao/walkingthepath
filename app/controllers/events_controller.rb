@@ -25,7 +25,7 @@ class EventsController < ApplicationController
     flash[:notice] = []
     flash[:notice] << @event.errors[:title].first unless @event.errors[:title].empty?
     flash[:notice] << @event.errors[:link].first unless @event.errors[:link].empty?
-    redirect_to new_event_path
+    render :new
   end
 
   private

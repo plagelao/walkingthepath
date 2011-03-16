@@ -44,7 +44,8 @@ class Event < ActiveRecord::Base
 
   def invalid url
     begin
-      return true if URI.parse(url).class != URI::HTTP
+      uri_class = URI.parse(url).class
+      return true if uri_class != URI::HTTP and uri_class != URI::HTTPS
     rescue URI::InvalidURIError
       return true
     end

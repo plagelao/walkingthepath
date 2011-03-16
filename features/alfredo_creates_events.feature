@@ -25,3 +25,10 @@ Feature:
     And I identify myself as "Alberto"
     When I create an event without link
     Then I get notified about the need to fill the event link
+
+  @wip
+  Scenario: create an event with a date in the past
+    Given I ask for the next events
+    And I identify myself as "Alberto"
+    When I create an event with a date in the past
+    Then I get notified about the need to set only future dates

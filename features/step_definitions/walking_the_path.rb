@@ -1,19 +1,19 @@
 # encoding: utf-8
 
 Given /^"([^"]*)" event the (next|past) week at ([^"]*)$/ do |title, time, hour|
-  @event_date = next_week(hour)
-  @event_date = previous_week(hour) if time == 'past'
+  @date = next_week(hour)
+  @date = previous_week(hour) if time == 'past'
   event = Event.new
-  event.date = @event_date
+  event.date = @date
   event.title = title
   event.link = 'http://Alink.es'
   event.save
 end
 
 Given /^"([^"]*)" event the next week at ([^"]*) linked to "([^"]*)"$/ do |title, hour, link|
-  @event_date = next_week
+  @date = next_week
   event = Event.new
-  event.date = @event_date.to_i
+  event.date = @date.to_i
   event.title = title
   event.link = link
   event.save
@@ -44,8 +44,8 @@ Then /^I must see "([^"]*)" event at ([^"]*) the next week$/ do |event, hour|
   within('#events') do
     page.should have_content(event)
     page.should have_content(hour)
-    page.should have_content(@event_date.day.to_s)
-    page.should have_content(@event_date.month.to_s)
+    page.should have_content(@date.day.to_s)
+    page.should have_content(@date.month.to_s)
   end
 end
 Then /^I must see "([^"]*)" event before "([^"]*)" event$/ do |first_event, second_event|
@@ -58,8 +58,8 @@ end
 Then /^I must receive a notification of "([^"]*)" event at ([^"]*) the next week$/ do |event, hour|
   page.should have_content(event)
   page.should have_content(hour)
-  page.should have_content(@event_date.day.to_s)
-  page.should have_content(@event_date.month.to_s)
+  page.should have_content(@date.day.to_s)
+  page.should have_content(@date.month.to_s)
 end
 
 Then /^I must see an ask for the feed option$/ do

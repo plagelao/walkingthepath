@@ -1,10 +1,12 @@
 #encoding: utf-8
 When /^I create "([^"]*)" event for the next week at ([^"]*)$/ do |event, time|
   visit_create_an_event
+  @event = event
   fill_in('event_title', :with => event)
   set_next_week_as_event_date
   set_event_time_as time
-  fill_in('event_link', :with => 'http://Alink.es')
+  @link = 'http://Alink.es'
+  fill_in('event_link', :with => @link)
   click_button('Crear')
 end
 
@@ -12,7 +14,8 @@ When /^I create an event without title$/ do
   visit_create_an_event
   set_next_week_as_event_date
   set_event_time_as '10:30'
-  fill_in('event_link', :with => 'http://Alink.es')
+  @link = 'http://Alink.es'
+  fill_in('event_link', :with => @link)
   click_button('Crear')
 end
 
@@ -34,4 +37,14 @@ end
 
 Then /^I get notified about the need to fill the event link$/ do
   page.should have_content("Seguro que tienes un enlace a la descripción del evento por algún lado.")
+end
+
+Then /^the fields stay filled with the old data$/ do
+  find_field('event_title').value.should == @title if @title
+  find_field('event_link').value.should == @link if @link
+  page.should have_select('event_date_time_1i', :options =>[@date.year.to_s]) if @date
+  page.should have_select('event_date_time_2i', :options =>[month_number_in(@date).to_s]) if @date
+  page.should have_select('event_date_time_3i', :options =>[@date.day.to_s]) if @date
+  page.should have_select('event_date_time_4i', :options =>[@time.split(':')[0]]) if @time
+  page.should have_select('event_date_time_5i', :options =>[@time.split(':')[1]]) if @time
 end

@@ -24,13 +24,14 @@ def visit_create_an_event
 end
 
 def set_next_week_as_event_date
-  @event_date = next_week
-  select(@event_date.year.to_s, :from =>'event_date_1i')
-  select(month_number_in(@event_date).to_s, :from =>'event_date_2i')
-  select(@event_date.day.to_s, :from =>'event_date_3i')
+  @date = next_week
+  select(@date.year.to_s, :from =>'event_date_time_1i')
+  select(month_number_in(@date).to_s, :from =>'event_date_time_2i')
+  select(@date.day.to_s, :from =>'event_date_time_3i')
 end
 
 def set_event_time_as time
-  select(time.split(':')[0], :from =>'event_date_4i')
-  select(time.split(':')[1], :from =>'event_date_5i')
+  @time = time
+  select(time.split(':')[0], :from =>'event_date_time_4i')
+  select(time.split(':')[1], :from =>'event_date_time_5i')
 end

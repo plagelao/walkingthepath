@@ -59,7 +59,7 @@ describe EventsController do
 
     context "creates new events" do
 
-      let(:params) { {:event => {'title' => 'a coding dojo', 'link' => 'a link', 'date(1i)'=>'2011', 'date(2i)'=>'2', 'date(3i)'=>'15', 'date(4i)'=>'23', 'date(5i)'=>'56'}} }
+      let(:params) { {:event => {'title' => 'a coding dojo', 'link' => 'a link', 'date_time(1i)'=>'2011', 'date_time(2i)'=>'2', 'date_time(3i)'=>'15', 'date_time(4i)'=>'23', 'date_time(5i)'=>'56'}} }
 
       before do
         Event.stub(:new).and_return(event)

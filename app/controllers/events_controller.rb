@@ -39,7 +39,7 @@ class EventsController < ApplicationController
 
   def to_event_date(datetime_from_select, date = '')
     5.times do |index|
-      number = datetime_from_select["date(#{index+1}i)"]
+      number = datetime_from_select["date_time(#{index+1}i)"]
       number = '0'+number if number.length == 1
       date += number
     end

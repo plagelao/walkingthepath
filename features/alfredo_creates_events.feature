@@ -19,12 +19,14 @@ Feature:
     And I identify myself as "Alberto"
     When I create an event without title
     Then I get notified about the need to fill the event title
+    And the fields stay filled with the old data
 
   Scenario: create an event without an event link
     Given I ask for the next events
     And I identify myself as "Alberto"
     When I create an event without link
     Then I get notified about the need to fill the event link
+    And the fields stay filled with the old data
 
   @wip
   Scenario: create an event with a date in the past
@@ -32,3 +34,4 @@ Feature:
     And I identify myself as "Alberto"
     When I create an event with a date in the past
     Then I get notified about the need to set only future dates
+    And the fields stay filled with the old data

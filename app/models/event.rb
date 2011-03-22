@@ -1,4 +1,6 @@
 #encoding: utf-8
+require 'date'
+
 class Event < ActiveRecord::Base
 
   validate :event_title_cannot_be_blank,
@@ -25,6 +27,10 @@ class Event < ActiveRecord::Base
 
   def when
     "#{day} de #{month} a las #{time}"
+  end
+
+  def date_time
+    datetime.to_date
   end
 
   private

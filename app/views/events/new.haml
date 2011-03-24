@@ -1,4 +1,4 @@
-- unless notice.nil?
+- unless notice.nil? or notice.empty?
   - errors = notice.map(&:downcase).join(' Además, ')
   - errors[0] = errors.slice(0,1).capitalize
   #notice= errors

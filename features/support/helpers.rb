@@ -23,11 +23,20 @@ def visit_create_an_event
   end
 end
 
-def set_next_week_as_event_date
-  @date = next_week
+def fill_date
   select(@date.year.to_s, :from =>'event_date_time_1i')
   select(month_number_in(@date).to_s, :from =>'event_date_time_2i')
   select(@date.day.to_s, :from =>'event_date_time_3i')
+end
+
+def set_next_week_as_event_date
+  @date = next_week
+  fill_date
+end
+
+def set_previous_week_as_event_date
+  @date = previous_week
+  fill_date
 end
 
 def set_event_time_as time

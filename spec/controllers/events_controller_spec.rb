@@ -86,7 +86,8 @@ describe EventsController do
         before do
           event.stub(:save).and_return(false)
           event.stub(:errors).and_return({:title => ['title error'],
-                                          :link => ['link error']})
+                                          :link => ['link error'],
+                                          :date => ['date error']})
         end
 
         it "stays in the create form" do
@@ -98,6 +99,7 @@ describe EventsController do
           get :create, params
           flash.should contain("title error")
           flash.should contain("link error")
+          flash.should contain("date error")
         end
       end
 

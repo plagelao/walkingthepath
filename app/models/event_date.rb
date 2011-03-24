@@ -32,7 +32,7 @@ class EventDate
     @date
   end
 
-  def to_date
+  def date_time
     return DateTime.civil(year, @date.to_s.slice(4..5).to_i, day) if year != 0
     DateTime.now
   end

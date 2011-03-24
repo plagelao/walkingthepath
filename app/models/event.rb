@@ -4,7 +4,8 @@ require 'date'
 class Event < ActiveRecord::Base
 
   validate :event_title_cannot_be_blank,
-           :event_link_must_be_a_url
+           :event_link_must_be_a_url,
+           :event_date_must_be_in_the_future
 
   def self.in_the_future
     Event.to_come.ordered_by_date
@@ -13,24 +14,10 @@ class Event < ActiveRecord::Base
   scope :to_come, where("date > :today", :today => EventDate.now)
   scope :ordered_by_date, order('date ASC')
 
-  def month
-    datetime.month
-  end
-
-  def day
-    datetime.day
-  end
-
-  def time
-    datetime.time
-  end
+  delegate :month, :day, :time, :date_time, :to => :datetime
 
   def when
     "#{day} de #{month} a las #{time}"
-  end
-
-  def date_time
-    datetime.to_date
   end
 
   private
@@ -56,5 +43,9 @@ class Event < ActiveRecord::Base
       return true
     end
     false
+  end
+
+  def event_date_must_be_in_the_future
+    errors.add(:date, "La fecha del evento ya ha pasado, ¡Ojo!") if DateTime.now > date_time
   end
 end

@@ -25,6 +25,7 @@ class EventsController < ApplicationController
     flash[:notice] = []
     flash[:notice] << @event.errors[:title].first unless @event.errors[:title].empty?
     flash[:notice] << @event.errors[:link].first unless @event.errors[:link].empty?
+    flash[:notice] << @event.errors[:date].first unless @event.errors[:date].empty?
     render :new
   end
 

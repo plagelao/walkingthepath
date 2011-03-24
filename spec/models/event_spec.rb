@@ -3,29 +3,29 @@ require 'spec_helper'
 
 describe Event do
 
-  let(:event){Event.new({:date => 201101121000, :title => 'title', :link => 'link'})}
+  let(:event){Event.new({:date => 301101121000, :title => 'title', :link => 'link'})}
 
   it "is created for a specific date" do
-    event.date.should == 201101121000
+    event.date.should == 301101121000
   end
 
   it "updates the month when the date is changed" do
-    event.date = 201102121000
+    event.date = 301102121000
     event.month.should == 'Febrero'
   end
 
   it "updates the day when the date is changed" do
-    event.date = 201101131000
+    event.date = 301101131000
     event.day.should == 13
   end
 
   it "updates the hour when the date is changed" do
-    event.date = 201101121100
+    event.date = 301101121100
     event.time.should == '11:00'
   end
 
   it "shows an indefined hour when hour is set to 0000" do
-    event.date = 201101120000
+    event.date = 301101120000
     event.time.should == '---'
   end
 
@@ -49,6 +49,11 @@ describe Event do
     it "that has a valid link even if it is secure" do
       event.link = 'https://www.google.es'
       expect{event.save!}.to_not raise_error
+    end
+
+    it "that has a date in the future" do
+      event.date = 100001010000
+      expect{event.save!}.to raise_error(/La fecha del evento ya ha pasado, ¡Ojo!/)
     end
   end
 end

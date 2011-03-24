@@ -21,8 +21,20 @@ end
 
 When /^I create an event without link$/ do
   visit_create_an_event
-  fill_in('event_title', :with => 'A title')
+  @title = 'A title'
+  fill_in('event_title', :with => @title)
   set_next_week_as_event_date
+  set_event_time_as '10:30'
+  click_button('Crear')
+end
+
+When /^I create an event with a date in the past$/ do
+  visit_create_an_event
+  @title = 'A title'
+  fill_in('event_title', :with => @title)
+  @link = 'http://Alink.es'
+  fill_in('event_link', :with => @link)
+  set_previous_week_as_event_date
   set_event_time_as '10:30'
   click_button('Crear')
 end
@@ -37,6 +49,10 @@ end
 
 Then /^I get notified about the need to fill the event link$/ do
   page.should have_content("Seguro que tienes un enlace a la descripción del evento por algún lado.")
+end
+
+Then /^I get notified about the need to set only future dates$/ do
+  page.should have_content("La fecha del evento ya ha pasado, ¡ojo!")
 end
 
 Then /^the fields stay filled with the old data$/ do

@@ -28,7 +28,6 @@ Feature:
     Then I get notified about the need to fill the event link
     And the fields stay filled with the old data
 
-  @wip
   Scenario: create an event with a date in the past
     Given I ask for the next events
     And I identify myself as "Alberto"

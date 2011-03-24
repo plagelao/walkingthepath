@@ -3,8 +3,9 @@ require 'date'
 
 class Event < ActiveRecord::Base
 
-  validate :event_title_cannot_be_blank,
-           :event_link_must_be_a_url,
+  validates_presence_of :title, :message => "No seas vaguete y ponle un título al evento."
+  validates_presence_of :link, :message => "Seguro que tienes un enlace a la descripción del evento por algún lado."
+  validate :event_link_must_be_a_url,
            :event_date_must_be_in_the_future
 
   def self.in_the_future
@@ -26,12 +27,7 @@ class Event < ActiveRecord::Base
     EventDate.new(date)
   end
 
-  def event_title_cannot_be_blank
-    errors.add(:title, "No seas vaguete y ponle un título al evento.") if title.blank?
-  end
-
   def event_link_must_be_a_url
-    errors.add(:link, "Seguro que tienes un enlace a la descripción del evento por algún lado.") if link.blank?
     errors.add(:link, "Creo que el enlace que has escrito no es correcto. ¡Casi lo tienes!") if not link.blank? and invalid link
   end
 

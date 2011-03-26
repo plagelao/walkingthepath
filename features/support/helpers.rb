@@ -13,7 +13,16 @@ def today_plus(days, time)
 end
 
 def month_number_in(date)
-  EventDate::MONTHS.index(date.month) +1
+  EventDate::MONTHS.index(date.month) + 1
+end
+
+def create_event event
+  visit_create_an_event
+  set_title_as event[:title] if event.has_key?(:title)
+  set_link_as event[:link] if event.has_key?(:link)
+  set_date_as event[:date]
+  set_time_as event[:time]
+  click_button('Crear')
 end
 
 def visit_create_an_event
@@ -23,24 +32,47 @@ def visit_create_an_event
   end
 end
 
-def fill_date
+def set_title_as title
+  @title = title
+  fill_in('event_title', :with => @title)
+end
+
+def set_link_as link
+  @link = link
+  fill_in('event_link', :with => @link)
+end
+
+def set_date_as date
+  @date = date
   select(@date.year.to_s, :from =>'event_date_time_1i')
   select(month_number_in(@date).to_s, :from =>'event_date_time_2i')
   select(@date.day.to_s, :from =>'event_date_time_3i')
 end
 
-def set_next_week_as_event_date
-  @date = next_week
-  fill_date
-end
-
-def set_previous_week_as_event_date
-  @date = previous_week
-  fill_date
-end
-
-def set_event_time_as time
+def set_time_as time
   @time = time
   select(time.split(':')[0], :from =>'event_date_time_4i')
   select(time.split(':')[1], :from =>'event_date_time_5i')
 end
+
+def event_title
+  find_field('event_title').value
+end
+
+def event_link
+  find_field('event_link').value
+end
+
+def event_date
+  page.should have_select('event_date_time_1i', :options =>[@date.year.to_s])
+  page.should have_select('event_date_time_2i', :options =>[month_number_in(@date).to_s])
+  page.should have_select('event_date_time_3i', :options =>[@date.day.to_s])
+  @date
+end
+
+def event_time
+  page.should have_select('event_date_time_4i', :options =>[@time.split(':')[0]])
+  page.should have_select('event_date_time_5i', :options =>[@time.split(':')[1]])
+  @time
+end
+

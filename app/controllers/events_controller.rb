@@ -32,19 +32,7 @@ class EventsController < ApplicationController
   private
 
   def create_event_from(event_data, transformed_event_data = {})
-    transformed_event_data[:title] = event_data['title']
-    transformed_event_data[:link] = event_data['link']
-    transformed_event_data[:date] = to_event_date event_data
-    Event.new transformed_event_data
-  end
-
-  def to_event_date(datetime_from_select, date = '')
-    5.times do |index|
-      number = datetime_from_select["date_time(#{index+1}i)"]
-      number = '0'+number if number.length == 1
-      date += number
-    end
-    date.to_i
+    Event.new event_data
   end
 
   def user_logged_in?

@@ -9,11 +9,11 @@ end
 
 def today_plus(days, time)
   date = DateTime.now + days
-  EventDate.new(DateTime.civil(date.year, date.month, date.day, time[0,2].to_i, time[3,2].to_i).strftime(EventDate::DATE_TIME_FORMAT))
+  DateTime.civil(date.year, date.month, date.day, time[0,2].to_i, time[3,2].to_i)
 end
 
 def month_number_in(date)
-  EventDate::MONTHS.index(date.month) + 1
+  date.month
 end
 
 def create_event event
@@ -44,15 +44,15 @@ end
 
 def set_date_as date
   @date = date
-  select(@date.year.to_s, :from =>'event_date_time_1i')
-  select(month_number_in(@date).to_s, :from =>'event_date_time_2i')
-  select(@date.day.to_s, :from =>'event_date_time_3i')
+  select(@date.year.to_s, :from =>'event_datetime_1i')
+  select(month_number_in(@date).to_s, :from =>'event_datetime_2i')
+  select(@date.day.to_s, :from =>'event_datetime_3i')
 end
 
 def set_time_as time
   @time = time
-  select(time.split(':')[0], :from =>'event_date_time_4i')
-  select(time.split(':')[1], :from =>'event_date_time_5i')
+  select(time.split(':')[0], :from =>'event_datetime_4i')
+  select(time.split(':')[1], :from =>'event_datetime_5i')
 end
 
 def event_title
@@ -64,15 +64,15 @@ def event_link
 end
 
 def event_date
-  page.should have_select('event_date_time_1i', :options =>[@date.year.to_s])
-  page.should have_select('event_date_time_2i', :options =>[month_number_in(@date).to_s])
-  page.should have_select('event_date_time_3i', :options =>[@date.day.to_s])
+  page.should have_select('event_datetime_1i', :options =>[@date.year.to_s])
+  page.should have_select('event_datetime_2i', :options =>[month_number_in(@date).to_s])
+  page.should have_select('event_datetime_3i', :options =>[@date.day.to_s])
   @date
 end
 
 def event_time
-  page.should have_select('event_date_time_4i', :options =>[@time.split(':')[0]])
-  page.should have_select('event_date_time_5i', :options =>[@time.split(':')[1]])
+  page.should have_select('event_datetime_4i', :options =>[@time.split(':')[0]])
+  page.should have_select('event_datetime_5i', :options =>[@time.split(':')[1]])
   @time
 end
 

@@ -66,8 +66,7 @@ describe EventsController do
       end
 
       it "with the data filled by the user" do
-        event_data = {:title => 'a coding dojo', :link => 'a link', :date=>201102152356}
-        Event.should_receive(:new).with(event_data).and_return(event)
+        Event.should_receive(:new).with(params[:event]).and_return(event)
         get :create, params
       end
 

@@ -4,7 +4,7 @@ Given /^"([^"]*)" event the (next|past) week at ([^"]*)$/ do |title, time, hour|
   @date = next_week(hour)
   @date = previous_week(hour) if time == 'past'
   event = Event.new
-  event.date = @date
+  event.datetime = @date
   event.title = title
   event.link = 'http://Alink.es'
   event.save
@@ -13,7 +13,7 @@ end
 Given /^"([^"]*)" event the next week at ([^"]*) linked to "([^"]*)"$/ do |title, hour, link|
   @date = next_week
   event = Event.new
-  event.date = @date.to_i
+  event.datetime = @date
   event.title = title
   event.link = link
   event.save
@@ -45,7 +45,7 @@ Then /^I must see "([^"]*)" event at ([^"]*) the next week$/ do |event, hour|
     page.should have_content(event)
     page.should have_content(hour)
     page.should have_content(@date.day.to_s)
-    page.should have_content(@date.month.to_s)
+    page.should have_content(EventDate::MONTHS[@date.month - 1])
   end
 end
 Then /^I must see "([^"]*)" event before "([^"]*)" event$/ do |first_event, second_event|

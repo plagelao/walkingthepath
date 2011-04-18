@@ -12,10 +12,10 @@ class Event < ActiveRecord::Base
     Event.to_come.ordered_by_date
   end
 
-  scope :to_come, where("date > :today", :today => EventDate.now)
-  scope :ordered_by_date, order('date ASC')
+  scope :to_come, where("datetime > :today", :today => EventDate.now)
+  scope :ordered_by_date, order('datetime ASC')
 
-  delegate :month, :day, :time, :date_time, :to => :datetime
+  delegate :month, :day, :time, :date_time, :to => :date_time
 
   def when
     "#{day} de #{month} a las #{time}"
@@ -23,8 +23,8 @@ class Event < ActiveRecord::Base
 
   private
 
-  def datetime
-    EventDate.new(date)
+  def date_time
+    EventDate.new(datetime)
   end
 
   def event_link_must_be_a_url
@@ -42,6 +42,6 @@ class Event < ActiveRecord::Base
   end
 
   def event_date_must_be_in_the_future
-    errors.add(:date, "La fecha del evento ya ha pasado, ¡Ojo!") if DateTime.now > date_time
+    errors.add(:date, "La fecha del evento ya ha pasado, ¡Ojo!") if DateTime.now > datetime
   end
 end

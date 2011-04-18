@@ -3,30 +3,11 @@ require 'spec_helper'
 
 describe Event do
 
-  let(:event){Event.new({:date => 301101121000, :title => 'title', :link => 'link'})}
+  let(:tomorrow) { DateTime.now + 1 }
+  let(:event) {Event.new({:datetime => tomorrow, :title => 'title', :link => 'link'})}
 
   it "is created for a specific date" do
-    event.date.should == 301101121000
-  end
-
-  it "updates the month when the date is changed" do
-    event.date = 301102121000
-    event.month.should == 'Febrero'
-  end
-
-  it "updates the day when the date is changed" do
-    event.date = 301101131000
-    event.day.should == 13
-  end
-
-  it "updates the hour when the date is changed" do
-    event.date = 301101121100
-    event.time.should == '11:00'
-  end
-
-  it "shows an indefined hour when hour is set to 0000" do
-    event.date = 301101120000
-    event.time.should == '---'
+    event.datetime.should == tomorrow
   end
 
   context "validates" do
@@ -52,7 +33,7 @@ describe Event do
     end
 
     it "that has a date in the future" do
-      event.date = 100001010000
+      event.datetime = DateTime.yesterday
       expect{event.save!}.to raise_error(/La fecha del evento ya ha pasado, ¡Ojo!/)
     end
   end

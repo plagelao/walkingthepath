@@ -4,7 +4,7 @@ class EventDate
   DATE_TIME_FORMAT = '%Y%m%d%H%M'
 
   def self.now
-    DateTime.now.strftime(DATE_TIME_FORMAT).to_i
+    DateTime.now
   end
 
   def initialize(date)
@@ -12,15 +12,15 @@ class EventDate
   end
 
   def year
-    @date.to_s.slice(0..3).to_i
+    @date.year
   end
 
   def month
-    MONTHS[@date.to_s.slice(4..5).to_i - 1]
+    MONTHS[@date.month - 1]
   end
 
   def day
-    @date.to_s.slice(6..7).to_i
+    @date.day
   end
 
   def time
@@ -33,22 +33,20 @@ class EventDate
   end
 
   def date_time
-    return DateTime.civil(year, @date.to_s.slice(4..5).to_i, day) if year != 0
-    DateTime.now
+    @date
   end
   private
 
   def undetermined_hour?
-    @date.to_s.slice(8..11).to_i == 0
+    @date.hour == 0 && @date.min == 0
   end
 
   def hours
-    @date.to_s.slice(8..9)
+    "0#{@date.hour}".slice(-2..-1)
   end
 
   def minutes
-    @date.to_s.slice(10..11)
+    "0#{@date.min}".slice(-2..-1)
   end
-
 end
 

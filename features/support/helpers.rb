@@ -44,15 +44,15 @@ end
 
 def set_date_as date
   @date = date
-  select(@date.year.to_s, :from =>'event_datetime_1i')
-  select(month_number_in(@date).to_s, :from =>'event_datetime_2i')
-  select(@date.day.to_s, :from =>'event_datetime_3i')
+  select(@date.year.to_s, :from =>'slot_datetime_1i')
+  select(month_number_in(@date).to_s, :from =>'slot_datetime_2i')
+  select(@date.day.to_s, :from =>'slot_datetime_3i')
 end
 
 def set_time_as time
   @time = time
-  select(time.split(':')[0], :from =>'event_datetime_4i')
-  select(time.split(':')[1], :from =>'event_datetime_5i')
+  select(time.split(':')[0], :from =>'slot_datetime_4i')
+  select(time.split(':')[1], :from =>'slot_datetime_5i')
 end
 
 def event_title
@@ -64,15 +64,15 @@ def event_link
 end
 
 def event_date
-  page.should have_select('event_datetime_1i', :options =>[@date.year.to_s])
-  page.should have_select('event_datetime_2i', :options =>[month_number_in(@date).to_s])
-  page.should have_select('event_datetime_3i', :options =>[@date.day.to_s])
+  page.should have_select('slot_datetime_1i', :options =>[@date.year.to_s])
+  page.should have_select('slot_datetime_2i', :options =>[month_number_in(@date).to_s])
+  page.should have_select('slot_datetime_3i', :options =>[@date.day.to_s])
   @date
 end
 
 def event_time
-  page.should have_select('event_datetime_4i', :options =>[@time.split(':')[0]])
-  page.should have_select('event_datetime_5i', :options =>[@time.split(':')[1]])
+  page.should have_select('slot_datetime_4i', :options =>[@time.split(':')[0]])
+  page.should have_select('slot_datetime_5i', :options =>[@time.split(':')[1]])
   @time
 end
 

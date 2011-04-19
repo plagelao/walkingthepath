@@ -1,22 +1,16 @@
 # encoding: utf-8
-
-Given /^"([^"]*)" event the (next|past) week at ([^"]*)$/ do |title, time, hour|
+Given /^"([^"]*)" event the (next|past) week at ([^"]*) linked to "([^"]*)"$/ do |title, time, hour, link|
   @date = next_week(hour)
   @date = previous_week(hour) if time == 'past'
   event = Event.new
-  event.datetime = @date
-  event.title = title
-  event.link = 'http://Alink.es'
-  event.save
-end
-
-Given /^"([^"]*)" event the next week at ([^"]*) linked to "([^"]*)"$/ do |title, hour, link|
-  @date = next_week
-  event = Event.new
-  event.datetime = @date
+  event.build_slot :datetime => @date
   event.title = title
   event.link = link
   event.save
+end
+
+Given /^"([^"]*)" event the (next|past) week at ([^"]*)$/ do |title, time, hour|
+  Given %{"#{title}" event the #{time} week at #{hour} linked to "http://Alink.es"}
 end
 
 When /^I ask for the next events$/ do

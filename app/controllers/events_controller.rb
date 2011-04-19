@@ -17,10 +17,12 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+    @event.build_slot
   end
 
   def create
-    @event = create_event_from params[:event]
+    @event = Event.new params[:event]
+    @event.build_slot params[:slot]
     return redirect_to events_path if @event.save
     flash[:notice] = []
     flash[:notice] << @event.errors[:title].first unless @event.errors[:title].empty?
@@ -30,10 +32,6 @@ class EventsController < ApplicationController
   end
 
   private
-
-  def create_event_from(event_data, transformed_event_data = {})
-    Event.new event_data
-  end
 
   def user_logged_in?
     not session[:user_id].blank?

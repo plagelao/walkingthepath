@@ -1,3 +1,53 @@
 class Slot < ActiveRecord::Base
+
+  belongs_to :event
+
+  scope :to_come, where("datetime > :today", :today => DateTime.now)
+  scope :ordered_by_date, order('datetime ASC')
+
+  def self.in_the_future
+    Slot.to_come.ordered_by_date
+  end
+
   MONTHS = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+
+  def year
+    datetime.year
+  end
+
+  def month
+   Slot::MONTHS[datetime.month - 1]
+  end
+
+  def day
+    datetime.day
+  end
+
+  def hour
+    datetime.hour
+  end
+
+  def minute
+    datetime.min
+  end
+
+  def time
+    return '---' if undetermined_hour?
+    "#{hours}:#{minutes}"
+  end
+
+
+  private
+
+  def undetermined_hour?
+    datetime.hour == 0 && datetime.min == 0
+  end
+
+  def hours
+    "0#{datetime.hour}".slice(-2..-1)
+  end
+
+  def minutes
+    "0#{datetime.min}".slice(-2..-1)
+  end
 end

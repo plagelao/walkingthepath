@@ -4,6 +4,7 @@ require 'spec_helper'
 describe EventsController do
 
   let(:event) { mock_model(Event, :id => 1234, :link =>'http://www.google.es', :save => true) }
+  let(:slot) { mock_model(Slot, :id => 1234) }
 
   context "lists the events" do
 
@@ -59,14 +60,20 @@ describe EventsController do
 
     context "creates new events" do
 
-      let(:params) { {:event => {'title' => 'a coding dojo', 'link' => 'a link', 'date_time(1i)'=>'2011', 'date_time(2i)'=>'2', 'date_time(3i)'=>'15', 'date_time(4i)'=>'23', 'date_time(5i)'=>'56'}} }
+      let(:params) { {:event => {'title' => 'a coding dojo', 'link' => 'a link'}, :slot => {'datetime(1i)'=>'2011', 'datetime(2i)'=>'2', 'datetime(3i)'=>'15', 'datetime(4i)'=>'23', 'datetime(5i)'=>'56'}} }
 
       before do
         Event.stub(:new).and_return(event)
+        event.stub(:build_slot).and_return(slot)
       end
 
       it "with the data filled by the user" do
-        Event.should_receive(:new).with(params[:event]).and_return(event)
+        Event.should_receive(:new).with(params[:event])
+        get :create, params
+      end
+
+      it "with a slot" do
+        event.should_receive(:build_slot).with(params[:slot])
         get :create, params
       end
 

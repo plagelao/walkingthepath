@@ -4,10 +4,10 @@ require 'spec_helper'
 describe Event do
 
   let(:tomorrow) { DateTime.now + 1 }
-  let(:event) {Event.new({:datetime => tomorrow, :title => 'title', :link => 'link'})}
+  let(:event) {Event.new({:slot => Slot.new(:datetime => tomorrow), :title => 'title', :link => 'http://www.link.es'})}
 
   it "is created for a specific date" do
-    event.datetime.should == tomorrow
+    event.slot.datetime.should == tomorrow
   end
 
   context "validates" do
@@ -33,7 +33,7 @@ describe Event do
     end
 
     it "that has a date in the future" do
-      event.datetime = DateTime.yesterday
+      event.slot.datetime = DateTime.yesterday
       expect{event.save!}.to raise_error(/La fecha del evento ya ha pasado, ¡Ojo!/)
     end
   end

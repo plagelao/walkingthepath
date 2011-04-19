@@ -6,10 +6,6 @@ class CreateSlots < ActiveRecord::Migration
 
       t.timestamps
     end
-    Event.all.each do |event|
-      event.build_slot(:datetime => event.slot.date_time)
-      event.save!
-    end
   end
 
   def self.down

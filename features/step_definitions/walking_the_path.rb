@@ -45,7 +45,7 @@ Then /^I must see "([^"]*)" event at ([^"]*) the next week$/ do |event, hour|
     page.should have_content(event)
     page.should have_content(hour)
     page.should have_content(@date.day.to_s)
-    page.should have_content(EventDate::MONTHS[@date.month - 1])
+    page.should have_content(Slot::MONTHS[@date.month - 1])
   end
 end
 Then /^I must see "([^"]*)" event before "([^"]*)" event$/ do |first_event, second_event|

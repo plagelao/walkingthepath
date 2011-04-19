@@ -3,6 +3,8 @@ require 'date'
 
 class Event < ActiveRecord::Base
 
+  has_one :slot
+
   validates_presence_of :title, :message => "No seas vaguete y ponle un título al evento."
   validates_presence_of :link, :message => "Seguro que tienes un enlace a la descripción del evento por algún lado."
   validate :event_link_must_be_a_url,
@@ -12,20 +14,20 @@ class Event < ActiveRecord::Base
     Event.to_come.ordered_by_date
   end
 
-  scope :to_come, where("datetime > :today", :today => EventDate.now)
+  scope :to_come, where("datetime > :today", :today => OldSlot.now)
   scope :ordered_by_date, order('datetime ASC')
 
-  delegate :month, :day, :time, :date_time, :to => :date_time
+  delegate :month, :day, :time, :date_time, :to => :slot
 
   def when
     "#{day} de #{month} a las #{time}"
   end
 
-  private
-
-  def date_time
-    EventDate.new(datetime)
+  def slot
+    OldSlot.new(datetime)
   end
+
+  private
 
   def event_link_must_be_a_url
     errors.add(:link, "Creo que el enlace que has escrito no es correcto. ¡Casi lo tienes!") if not link.blank? and invalid link

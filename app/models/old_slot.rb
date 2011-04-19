@@ -1,6 +1,5 @@
-class EventDate
+class OldSlot
 
-  MONTHS = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
   DATE_TIME_FORMAT = '%Y%m%d%H%M'
 
   def self.now
@@ -16,7 +15,7 @@ class EventDate
   end
 
   def month
-    MONTHS[@date.month - 1]
+   Slot::MONTHS[@date.month - 1]
   end
 
   def day

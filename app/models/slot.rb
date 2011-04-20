@@ -36,7 +36,6 @@ class Slot < ActiveRecord::Base
     "#{hours}:#{minutes}"
   end
 
-
   private
 
   def undetermined_hour?

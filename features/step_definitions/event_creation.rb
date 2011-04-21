@@ -25,6 +25,13 @@ When /^I create an event with a date in the past$/ do
                :time => '10:30')
 end
 
+When /^I create "([^"]*)" event with an undefined time$/ do |title|
+  create_event(:title => title,
+               :link => 'http://Alink.es',
+               :date => next_week,
+               :undefined_time => true)
+end
+
 Then /^I am not able to create new events$/ do
   page.should_not have_content("Añadir un evento")
 end

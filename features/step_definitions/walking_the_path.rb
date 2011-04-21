@@ -42,6 +42,16 @@ Then /^I must see "([^"]*)" event at ([^"]*) the next week$/ do |event, hour|
     page.should have_content(Slot::MONTHS[@date.month - 1])
   end
 end
+
+Then /^I must see "([^"]*)" event with an undefined time$/ do |event|
+  within('#events') do
+    page.should have_content(event)
+    page.should have_content('---')
+    page.should have_content(@date.day.to_s)
+    page.should have_content(Slot::MONTHS[@date.month - 1])
+  end
+end
+
 Then /^I must see "([^"]*)" event before "([^"]*)" event$/ do |first_event, second_event|
   within('#events') do
     all('.h2')[0].all('a')[0].text.should == first_event

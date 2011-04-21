@@ -189,34 +189,86 @@
         color: #f9f9f9;
         text-decoration: none; }
 
+#title {
+  width: 6.5em;
+  margin-left: 7em;
+  padding-left: 0.5em;
+  padding-right: 0.2em;
+  font-size: 2em;
+  color: #666666;
+  background-color: #f0f0f0;
+  top: 1.6em;
+  position: relative; }
+
 form {
-  margin-left: 5%;
-  margin-top: 5%;
-  width: 900px;
-  display: block; }
-  form label {
-    width: 12em;
-    float: left;
-    text-align: right;
-    font-size: 1.5em;
-    margin-left: 10%;
-    margin-right: 0.5em;
-    color: #666666;
-    display: block; }
-  form input {
-    font-size: 1.5em;
-    margin-left: 0.5em;
-    margin-bottom: 10px; }
-  form #new_event {
-    margin-left: 75%;
-    margin-top: 10px;
-    line-height: 1.5em;
-    font-size: 1em; }
-  form select {
-    font-size: 1em;
-    margin-left: 0.5em;
-    margin-top: 10px;
-    margin-bottom: 5px; }
+  margin-left: 3.1em;
+  width: 900px; }
+  form #event_details {
+    width: 34em;
+    padding-top: 2em;
+    margin-top: 2em;
+    margin-bottom: 3em;
+    margin-left: 10em;
+    border: 2px solid #666666; }
+    form #event_details label {
+      width: 20em;
+      font-size: 1.5em;
+      margin-left: 5%;
+      margin-right: 5%;
+      color: #666666; }
+    form #event_details input {
+      width: 20em;
+      font-size: 1.5em;
+      margin-left: 5%;
+      margin-right: 5%;
+      margin-bottom: 10px; }
+    form #event_details #when {
+      width: 4.2em;
+      margin-left: 1.2em;
+      padding-left: 0.5em;
+      padding-right: 0.2em;
+      font-size: 2em;
+      color: #666666;
+      background-color: #f0f0f0;
+      top: 0.6em;
+      position: relative; }
+    form #event_details #event_slot {
+      width: 30em;
+      padding-top: 2em;
+      margin-bottom: 2em;
+      margin-left: 5%;
+      border: 2px solid #666666; }
+      form #event_details #event_slot #event_date {
+        font-size: 1.5em;
+        margin-left: 0.5em; }
+        form #event_details #event_slot #event_date select {
+          font-size: 1em;
+          margin-top: 10px;
+          margin-bottom: 5px;
+          margin-left: 0.5em; }
+      form #event_details #event_slot #undefined_time {
+        margin-top: 10px;
+        margin-left: 0.7em; }
+        form #event_details #event_slot #undefined_time label {
+          width: 20em;
+          font-size: 1.5em;
+          margin-left: 7%;
+          margin-right: 5%;
+          color: #666666;
+          position: relative;
+          top: -1.13em; }
+        form #event_details #event_slot #undefined_time input {
+          font-size: 1.5em;
+          margin-left: 0.5em;
+          margin-bottom: 0px; }
+    form #event_details #new_event {
+      width: 90%;
+      margin-left: 5%;
+      margin-right: 5%;
+      margin-top: 1em;
+      margin-bottom: 1em;
+      line-height: 1.5em;
+      font-size: 1em; }
 
 #signed_in {
   padding: 0.1em 0 0 0;

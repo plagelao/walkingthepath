@@ -2,22 +2,27 @@
   - errors = notice.map(&:downcase).join(' Además, ')
   - errors[0] = errors.slice(0,1).capitalize
   #notice= errors
+#title
+  Nuevo Evento:
 = form_for(@event, :url => {:action => 'create'}) do |event_form|
-  %p
-  = event_form.label(:title, "Evento:")
-  %p
-  = event_form.text_field(:title)
-
-  %p
-  = event_form.label(:link, "Enlace a la web del evento:")
-  %p
-  = event_form.text_field(:link)
-
-  = fields_for @event.slot do |slot_form|
+  #event_details
     %p
-    = slot_form.label(:date, "Fecha del evento:")
-    %p
-    = datetime_select('slot', 'datetime', :use_month_numbers => true)
+    = event_form.label(:title, "Evento:")
+    = event_form.text_field(:title)
 
-  %p
-  = submit_tag('Crear Evento', :id => 'new_event')
+    %p
+    = event_form.label(:link, "Enlace a la web del evento:")
+    = event_form.text_field(:link)
+
+    #when
+      ¿Cuándo?
+    #event_slot
+      = fields_for @event.slot do |slot_form|
+        = slot_form.label(:date, "Fecha del evento:")
+        #event_date
+          = datetime_select('slot', 'datetime', :use_month_numbers => true)
+        %p#undefined_time
+          = slot_form.check_box(:undefined_time)
+          = slot_form.label(:undefined_time, "no tengo ni idea de a que hora será...")
+    %p
+    = submit_tag('Crear Evento', :id => 'new_event')

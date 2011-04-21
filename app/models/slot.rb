@@ -32,15 +32,11 @@ class Slot < ActiveRecord::Base
   end
 
   def time
-    return '---' if undetermined_hour?
+    return '---' if undefined_time
     "#{hours}:#{minutes}"
   end
 
   private
-
-  def undetermined_hour?
-    datetime.hour == 0 && datetime.min == 0
-  end
 
   def hours
     "0#{datetime.hour}".slice(-2..-1)

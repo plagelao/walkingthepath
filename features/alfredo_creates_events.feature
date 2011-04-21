@@ -34,3 +34,10 @@ Feature:
     When I create an event with a date in the past
     Then I get notified about the need to set only future dates
     And the fields stay filled with the old data
+
+  Scenario: create an event with undefined time
+    Given I ask for the next events
+    And I identify myself as "Alberto"
+    When I create "a pair programming session" event with an undefined time
+    And I ask for the next events
+    Then I must see "a pair programming session" event with an undefined time

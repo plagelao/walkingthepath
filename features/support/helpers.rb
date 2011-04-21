@@ -21,7 +21,8 @@ def create_event event
   set_title_as event[:title] if event.has_key?(:title)
   set_link_as event[:link] if event.has_key?(:link)
   set_date_as event[:date]
-  set_time_as event[:time]
+  set_time_as event[:time] if event.has_key?(:time)
+  set_undefined_time if event[:undefined_time]
   click_button('Crear')
 end
 
@@ -53,6 +54,10 @@ def set_time_as time
   @time = time
   select(time.split(':')[0], :from =>'slot_datetime_4i')
   select(time.split(':')[1], :from =>'slot_datetime_5i')
+end
+
+def set_undefined_time
+  check('slot_undefined_time')
 end
 
 def event_title

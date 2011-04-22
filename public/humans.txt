@@ -1,0 +1,12 @@
+/* TEAM */
+  Developer:Alberto Peña Abril
+  Contact: plagelao [at] gmail.com
+  Twitter: @plagelao
+  From:Madrid, Spain
+  From:Eastleigh, UK
+
+/* SITE */
+  Last update:2011/03/31
+  Language:Castellano
+  Doctype:HTML5
+  IDE:Vim

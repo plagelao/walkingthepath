@@ -4,6 +4,6 @@ class AddUndefinedTimeToSlots < ActiveRecord::Migration
   end
 
   def self.down
-    remove_column :events, :undefined_time
+    remove_column :slots, :undefined_time
   end
 end

@@ -9,4 +9,4 @@
   Last update:2011/03/31
   Language:Castellano
   Doctype:HTML5
-  IDE:Vim
+  Software:Vim, ITerm2, Git, Rails, HAML, SASS

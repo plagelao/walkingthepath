@@ -21,13 +21,9 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new params[:event]
-    @event.build_slot params[:slot]
-    return redirect_to events_path if @event.save
-    flash[:notice] = []
-    flash[:notice] << @event.errors[:title].first unless @event.errors[:title].empty?
-    flash[:notice] << @event.errors[:link].first unless @event.errors[:link].empty?
-    flash[:notice] << @event.errors[:date].first unless @event.errors[:date].empty?
+    invalid_event = announcer.announce_event(params[:event], params[:slot])
+    return redirect_to events_path unless invalid_event
+    @event = invalid_event
     render :new
   end
 
@@ -39,5 +35,10 @@ class EventsController < ApplicationController
 
   def assert_user_is_authenticated
     redirect_to events_path unless user_logged_in?
+  end
+
+  def announcer
+    User.find(session[:user_id])
+    Announcer.new(flash)
   end
 end

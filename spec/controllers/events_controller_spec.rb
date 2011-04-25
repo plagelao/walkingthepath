@@ -60,25 +60,26 @@ describe EventsController do
 
     context "creates new events" do
 
-      let(:params) { {:event => {'title' => 'a coding dojo', 'link' => 'a link'}, :slot => {'datetime(1i)'=>'2011', 'datetime(2i)'=>'2', 'datetime(3i)'=>'15', 'datetime(4i)'=>'23', 'datetime(5i)'=>'56'}} }
+      let(:params) { {:event => {}, :slot => {}} }
+      let(:announcer) { stub(:announcer, :announce_event => false) }
 
       before do
-        Event.stub(:new).and_return(event)
-        event.stub(:build_slot).and_return(slot)
+        User.stub(:find).and_return(announcer)
+        Announcer.stub(:new).and_return(announcer)
       end
 
-      it "with the data filled by the user" do
-        Event.should_receive(:new).with(params[:event])
+      it 'with the actual user' do
+        User.should_receive(:find).with(1234)
         get :create, params
       end
 
-      it "with a slot" do
-        event.should_receive(:build_slot).with(params[:slot])
+      it 'as an announcer' do
+        Announcer.should_receive(:new)
         get :create, params
       end
 
-      it "by saving the new event" do
-        event.should_receive(:save)
+      it 'announced by the actual user' do
+        announcer.should_receive(:announce_event).with(params[:event], params[:slot])
         get :create, params
       end
 
@@ -89,24 +90,19 @@ describe EventsController do
 
       context "but when the event does not have valid fields" do
 
-        before do
-          event.stub(:save).and_return(false)
-          event.stub(:errors).and_return({:title => ['title error'],
-                                          :link => ['link error'],
-                                          :date => ['date error']})
-        end
+        let(:invalid_event) { stub(:invalid_event) }
+        let(:announcer) { stub(:announcer, :announce_event => invalid_event) }
 
         it "stays in the create form" do
           get :create, params
           response.should render_template(:new)
         end
 
-        it "shows an error" do
+        it 'assigns the invalid event' do
           get :create, params
-          flash.should contain("title error")
-          flash.should contain("link error")
-          flash.should contain("date error")
+          assigns[:event].should eq(invalid_event)
         end
+
       end
 
     end

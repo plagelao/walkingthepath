@@ -11,6 +11,10 @@ class Event < ActiveRecord::Base
   validate :event_link_must_be_a_url,
            :event_date_must_be_in_the_future
 
+  def self.for_today
+    Slot.for_today.map(&:event)
+  end
+
   def self.in_the_future
     Slot.in_the_future.map(&:event)
   end

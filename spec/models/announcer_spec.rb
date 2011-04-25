@@ -13,7 +13,7 @@ describe Announcer do
     Event.stub(:new).and_return(event)
     event.stub(:build_slot).and_return(slot)
     event.stub(:save)
-    event.stub(:valid?)
+    event.stub(:valid?).and_return(true)
     event.stub(:errors).and_return({:title => [], :link => [], :date => []})
   end
 

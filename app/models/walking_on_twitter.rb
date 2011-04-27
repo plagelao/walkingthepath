@@ -1,8 +1,15 @@
 class WalkingOnTwitter
   def self.update
     Event.for_today.each do |event|
-      Twitter.update("Hoy a las #{event.time}, #{event.title}. Más información en #{event.link} #{cheering_message}")
+      Twitter.update(message_for(event))
     end
+  end
+
+  def self.message_for(event)
+    message = "Hoy a las #{event.time}, #{event.title}. Más información en #{event.link} #{cheering_message}"
+    return message if message.size <= 140
+    message = "Hoy a las #{event.time}, #{event.title}. #{cheering_message}" if message.size <= 140
+    "Hoy #{event.title}"
   end
 
   def self.cheering_message

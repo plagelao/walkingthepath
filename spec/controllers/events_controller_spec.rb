@@ -60,26 +60,21 @@ describe EventsController do
 
     context "creates new events" do
 
+      let(:event) { mock(:event, :build_slot => nil,
+                                 :save => true) }
       let(:params) { {:event => {}, :slot => {}} }
-      let(:announcer) { stub(:announcer, :announce_event => false) }
 
       before do
-        User.stub(:find).and_return(announcer)
-        Announcer.stub(:new).and_return(announcer)
+        Event.stub(:new => event)
       end
 
-      it 'with the actual user' do
-        User.should_receive(:find).with(1234)
+      it 'with the data from params' do
+        Event.should_receive(:new) .with(params[:event])
         get :create, params
       end
 
-      it 'as an announcer' do
-        Announcer.should_receive(:new)
-        get :create, params
-      end
-
-      it 'announced by the actual user' do
-        announcer.should_receive(:announce_event).with(params[:event], params[:slot])
+      it 'adds a slot from the params' do
+        event.should_receive(:build_slot) .with(params[:slot])
         get :create, params
       end
 
@@ -88,10 +83,17 @@ describe EventsController do
         response.should redirect_to(events_path)
       end
 
+      it "saves the event" do
+        event.should_receive(:save)
+        get :create, params
+      end
+
       context "but when the event does not have valid fields" do
 
-        let(:invalid_event) { stub(:invalid_event) }
-        let(:announcer) { stub(:announcer, :announce_event => invalid_event) }
+        before do
+          event.stub(:save => false,
+                     :errors => {:title => [], :link => [], :date => []})
+        end
 
         it "stays in the create form" do
           get :create, params
@@ -100,7 +102,7 @@ describe EventsController do
 
         it 'assigns the invalid event' do
           get :create, params
-          assigns[:event].should eq(invalid_event)
+          assigns[:event].should eq(event)
         end
 
       end

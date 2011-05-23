@@ -21,10 +21,17 @@ class EventsController < ApplicationController
   end
 
   def create
-    invalid_event = announcer.announce_event(params[:event], params[:slot])
-    return redirect_to events_path unless invalid_event
-    @event = invalid_event
-    render :new
+    @event = Event.new params[:event]
+    @event.build_slot params[:slot]
+    if @event.save
+      redirect_to events_path
+    else
+      flash[:notice] = []
+      flash[:notice] << @event.errors[:title].first unless @event.errors[:title].empty?
+      flash[:notice] << @event.errors[:link].first unless @event.errors[:link].empty?
+      flash[:notice] << @event.errors[:date].first unless @event.errors[:date].empty?
+      render :new
+    end
   end
 
   private
@@ -37,8 +44,4 @@ class EventsController < ApplicationController
     redirect_to events_path unless user_logged_in?
   end
 
-  def announcer
-    User.find(session[:user_id])
-    Announcer.new(flash)
-  end
 end

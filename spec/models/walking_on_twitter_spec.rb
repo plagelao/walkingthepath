@@ -10,12 +10,13 @@ describe WalkingOnTwitter do
 
     before do
       Twitter.stub(:update)
+      Googl.stub(:shorten => 'A link')
       Event.stub(:for_today).and_return(today_events)
       WalkingOnTwitter.stub(:cheering_message).and_return('¿Te lo vas a perder?')
     end
 
     it 'gets the events for today' do
-      Event.should_receive(:for_today)
+      Event.should_receive(:for_today).and_return([])
       WalkingOnTwitter.update
     end
 

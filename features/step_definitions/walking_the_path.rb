@@ -9,6 +9,15 @@ Given /^"([^"]*)" event the (next|past) week at ([^"]*) linked to "([^"]*)"$/ do
   event.save
 end
 
+Given /^"([^"]*)" event today at ([^"]*)$/ do |title, time|
+  @date = today_plus(0, time)
+  event = Event.new
+  event.build_slot :datetime => @date
+  event.title = title
+  event.link = 'http://Alink.es'
+  event.save
+end
+
 Given /^"([^"]*)" event the (next|past) week at ([^"]*)$/ do |title, time, hour|
   Given %{"#{title}" event the #{time} week at #{hour} linked to "http://Alink.es"}
 end

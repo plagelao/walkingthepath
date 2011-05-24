@@ -10,7 +10,7 @@ describe WalkingOnTwitter do
 
     before do
       Twitter.stub(:update)
-      Googl.stub(:shorten => 'A link')
+      Googl.stub(:shorten => stub(:url, :short_url => 'A link'))
       Event.stub(:for_today).and_return(events)
       Event.stub(:for_tomorrow).and_return([])
       WalkingOnTwitter.stub(:cheering_message).and_return('¿Te lo vas a perder?')

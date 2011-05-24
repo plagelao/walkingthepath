@@ -15,6 +15,10 @@ class Event < ActiveRecord::Base
     Slot.for_today.map(&:event)
   end
 
+  def self.for_tomorrow
+    Slot.for_tomorrow.map(&:event)
+  end
+
   def self.in_the_future
     Slot.in_the_future.map(&:event)
   end

@@ -9,8 +9,9 @@ Given /^"([^"]*)" event the (next|past) week at ([^"]*) linked to "([^"]*)"$/ do
   event.save
 end
 
-Given /^"([^"]*)" event today at ([^"]*)$/ do |title, time|
-  @date = today_plus(0, time)
+Given /^"([^"]*)" event (today|tomorrow) at ([^"]*)$/ do |title, day, time|
+  days = day == 'today'? 0 : 1
+  @date = today_plus(days, time)
   event = Event.new
   event.build_slot :datetime => @date
   event.title = title

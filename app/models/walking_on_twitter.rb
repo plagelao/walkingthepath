@@ -1,15 +1,35 @@
+#encode: utf-8
 class WalkingOnTwitter
   def self.update
+    self.tweet_today_events
+    self.tweet_tomorrow_events
+  end
+
+  def self.tweet_today_events
     Event.for_today.each do |event|
-      Twitter.update(message_for(event))
+      Twitter.update(message_for_today(event))
     end
   end
 
-  def self.message_for(event)
-    message = "Hoy a las #{event.time}, #{event.title}. Más información en #{short(event.link)} #{cheering_message}"
+  def self.tweet_tomorrow_events
+    Event.for_tomorrow.each do |event|
+      Twitter.update(message_for_tomorrow(event))
+    end
+  end
+
+  def self.message_for_today(event)
+    self.message_for('Hoy', event)
+  end
+
+  def self.message_for_tomorrow(event)
+    self.message_for('Mañana', event)
+  end
+
+  def self.message_for(day, event)
+    message = "#{day} a las #{event.time}, #{event.title}. Más información en #{short(event.link)} #{cheering_message}"
     return message if message.size <= 140
-    message = "Hoy a las #{event.time}, #{event.title}. #{cheering_message}" if message.size <= 140
-    "Hoy #{event.title}"
+    message = "#{day} a las #{event.time}, #{event.title}. #{cheering_message}" if message.size <= 140
+    "#{day} #{event.title}"
   end
 
   def self.cheering_message

@@ -3,6 +3,7 @@ class Slot < ActiveRecord::Base
   belongs_to :event
 
   scope :for_today, where("datetime >= :today AND datetime < :tomorrow", :today => DateTime.now, :tomorrow => DateTime.tomorrow)
+  scope :for_tomorrow, where("datetime >= :tomorrow AND datetime < :two_days_ahead", :tomorrow => DateTime.tomorrow, :two_days_ahead => DateTime.tomorrow + 1)
   scope :to_come, where("datetime > :today", :today => DateTime.now)
   scope :ordered_by_date, order('datetime ASC')
 

@@ -38,6 +38,6 @@ class WalkingOnTwitter
   end
 
   def self.short(url)
-    Googl.shorten(url)
+    Googl.shorten(url).short_url
   end
 end

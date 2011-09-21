@@ -2,33 +2,29 @@
 When /^I create "([^"]*)" event for the next week at ([^"]*)$/ do |title, time|
   create_event(:title => title,
                :link => 'http://Alink.es',
-               :date => next_week,
-               :time => time)
+               :datetime => next_week(time))
 end
 
 When /^I create an event without title$/ do
   create_event(:link => 'http://Alink.es',
-               :date => next_week,
-               :time => '10:30')
+               :datetime => next_week('10:30'))
 end
 
 When /^I create an event without link$/ do
   create_event(:title => 'A title',
-               :date => next_week,
-               :time => '10:30')
+               :datetime => next_week('10:30'))
 end
 
 When /^I create an event with a date in the past$/ do
   create_event(:title => 'A title',
                :link => 'http://Alink.es',
-               :date => previous_week,
-               :time => '10:30')
+               :datetime => previous_week('10:30'))
 end
 
 When /^I create "([^"]*)" event with an undefined time$/ do |title|
   create_event(:title => title,
                :link => 'http://Alink.es',
-               :date => next_week,
+               :datetime => next_week,
                :undefined_time => true)
 end
 
@@ -51,6 +47,5 @@ end
 Then /^the fields stay filled with the old data$/ do
   event_title.should == @title if @title
   event_link.should == @link if @link
-  event_date.should == @date if @date
-  event_time.should == @time if @time
+  event_datetime.should == @datetime if @datetime
 end

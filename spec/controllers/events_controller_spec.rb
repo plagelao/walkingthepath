@@ -60,7 +60,8 @@ describe EventsController do
 
     context "creates new events" do
 
-      let(:event) { mock(:event, :build_slot => nil,
+      let(:slot) { mock(:slot) }
+      let(:event) { mock(:event, :build_slot => slot,
                                  :save => true) }
       let(:params) { {:event => {}, :slot => {}} }
 
@@ -92,7 +93,9 @@ describe EventsController do
 
         before do
           event.stub(:save => false,
-                     :errors => {:title => [], :link => [], :date => []})
+                     :errors => {:title => [], :link => []})
+          slot.stub(:valid? => false,
+                     :errors => {:datetime => []})
         end
 
         it "stays in the create form" do
@@ -112,7 +115,7 @@ describe EventsController do
 
   context "if the user is not authenticated" do
 
-    let(:params) { {:event => {'title' => 'a coding dojo', 'link' => 'a link', 'date(1i)'=>'2011', 'date(2i)'=>'2', 'date(3i)'=>'15', 'date(4i)'=>'23', 'date(5i)'=>'56'}} }
+    let(:params) { {:event => {'title' => 'a coding dojo', 'link' => 'a link', 'datetime'=>'15/02/2011 23:56'}} }
 
     it "does not allow the creation of new events" do
       get :new

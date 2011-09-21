@@ -9,21 +9,16 @@ end
 
 def today_plus(days, time)
   date = DateTime.now + days
-  DateTime.civil(date.year, date.month, date.day, time[0,2].to_i, time[3,2].to_i)
-end
-
-def month_number_in(date)
-  date.month
+  @datetime = DateTime.civil(date.year, date.month, date.day, time[0,2].to_i, time[3,2].to_i)
 end
 
 def create_event event
   visit_create_an_event
   set_title_as event[:title] if event.has_key?(:title)
   set_link_as event[:link] if event.has_key?(:link)
-  set_date_as event[:date]
-  set_time_as event[:time] if event.has_key?(:time)
+  set_datetime_as event[:datetime]
   set_undefined_time if event[:undefined_time]
-  click_button('Crear')
+  click_button('Crear Evento')
 end
 
 def visit_create_an_event
@@ -43,17 +38,9 @@ def set_link_as link
   fill_in('event_link', :with => @link)
 end
 
-def set_date_as date
-  @date = date
-  select(@date.year.to_s, :from =>'slot_datetime_1i')
-  select(month_number_in(@date).to_s, :from =>'slot_datetime_2i')
-  select(@date.day.to_s, :from =>'slot_datetime_3i')
-end
-
-def set_time_as time
-  @time = time
-  select(time.split(':')[0], :from =>'slot_datetime_4i')
-  select(time.split(':')[1], :from =>'slot_datetime_5i')
+def set_datetime_as datetime
+  fill_in('slot_datetime_as_string', :with => datetime.to_s(:walking))
+  @datetime = datetime
 end
 
 def set_undefined_time
@@ -68,16 +55,7 @@ def event_link
   find_field('event_link').value
 end
 
-def event_date
-  page.should have_select('slot_datetime_1i', :options =>[@date.year.to_s])
-  page.should have_select('slot_datetime_2i', :options =>[month_number_in(@date).to_s])
-  page.should have_select('slot_datetime_3i', :options =>[@date.day.to_s])
-  @date
+def event_datetime
+  datetime = find_field('slot_datetime_as_string').value
+  DateTime.strptime(datetime, "%d/%m/%Y %H:%M")
 end
-
-def event_time
-  page.should have_select('slot_datetime_4i', :options =>[@time.split(':')[0]])
-  page.should have_select('slot_datetime_5i', :options =>[@time.split(':')[1]])
-  @time
-end
-

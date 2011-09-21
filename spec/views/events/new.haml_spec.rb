@@ -14,21 +14,13 @@ describe "events/new.haml" do
     rendered.should have_selector('form input#event_link')
   end
 
-  it "has an input field for the event date" do
+  it "has an input field for the event date and time" do
     render
-    rendered.should have_selector('form select#slot_datetime_1i')
-    rendered.should have_selector('form select#slot_datetime_2i')
-    rendered.should have_selector('form select#slot_datetime_3i')
-  end
-
-  it "has an input field for the event time" do
-    render
-    rendered.should have_selector('form select#slot_datetime_4i')
-    rendered.should have_selector('form select#slot_datetime_5i')
+    rendered.should have_selector('form input#slot_datetime_as_string')
   end
 
   it "has a button to create the event" do
     render
-    rendered.should have_selector('form input#new_event')
+    rendered.should have_selector('form input#event_submit')
   end
 end

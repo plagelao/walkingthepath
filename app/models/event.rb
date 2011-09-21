@@ -4,12 +4,13 @@ require 'date'
 class Event < ActiveRecord::Base
 
   has_one :slot
-  accepts_nested_attributes_for :slot
 
   validates_presence_of :title, :message => "No seas vaguete y ponle un título al evento."
   validates_presence_of :link, :message => "Seguro que tienes un enlace a la descripción del evento por algún lado."
-  validate :event_link_must_be_a_url,
-           :event_date_must_be_in_the_future
+  validates_presence_of :slot, :message => "Seguro que sabes cuando se celebrará el evento."
+  validates_associated :slot
+
+  validate :event_link_must_be_a_url
 
   def self.for_today
     Slot.for_today.map(&:event)
@@ -23,10 +24,14 @@ class Event < ActiveRecord::Base
     Slot.in_the_future.map(&:event)
   end
 
-  delegate :month, :day, :time, :date_time, :to => :slot
+  delegate :month, :day, :time, :to => :slot
 
   def when
     "#{day} de #{month} a las #{time}"
+  end
+
+  def error_for(field)
+    errors[field].first
   end
 
   private
@@ -45,7 +50,4 @@ class Event < ActiveRecord::Base
     false
   end
 
-  def event_date_must_be_in_the_future
-    errors.add(:date, "La fecha del evento ya ha pasado, ¡Ojo!") if DateTime.now > slot.datetime
-  end
 end

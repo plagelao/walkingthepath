@@ -1,79 +1,37 @@
+#new_event
+  width: 86%
+  color: $font-color
+  margin: 2em auto
+
 #title
-  width: 6.5em
-  margin-left: 7.0em
-  padding-left: 0.5em
-  padding-right: 0.2em
-  font-size: 2.0em
-  color: $dark_gray
-  background-color: $dark_white
-  top: 1.6em
-  position: relative
-form
-  margin-left: 3.1em
-  width: 900px
-  #event_details
-    width: 34em
-    padding-top: 2em
-    margin-top: 2em
-    margin-bottom: 3em
-    margin-left: 10em
-    border: 2px solid $dark_gray
-    label
-      width: 20em
-      font-size: 1.5em
-      margin-left: 5%
-      margin-right: 5%
-      color: $dark_gray
-    input
-      width: 20em
-      font-size: 1.5em
-      margin-left: 5%
-      margin-right: 5%
-      margin-bottom: 10px
-    #when
-      width: 4.2em
-      margin-left: 1.2em
-      padding-left: 0.5em
-      padding-right: 0.2em
-      font-size: 2.0em
-      color: $dark_gray
-      background-color: $dark_white
-      top: 0.6em
-      position: relative
-    #event_slot
-      width: 30em
-      padding-top: 2em
-      margin-bottom: 2em
-      margin-left: 5%
-      border: 2px solid $dark_gray
-      #event_date
-        font-size: 1.5em
-        margin-left: 0.5em
-        select
-          font-size: 1em
-          margin-top: 10px
-          margin-bottom: 5px
-          margin-left: 0.5em
-      #undefined_time
-        margin-top: 10px
-        margin-left: 0.7em
-        label
-          width: 20em
-          font-size: 1.5em
-          margin-left: 7%
-          margin-right: 5%
-          color: $dark_gray
-          position: relative
-          top: -1.13em
-        input
-          font-size: 1.5em
-          margin-left: 0.5em
-          margin-bottom: 0px
-    #new_event
-      width: 90%
-      margin-left: 5%
-      margin-right: 5%
-      margin-top: 1em
-      margin-bottom: 1em
-      line-height: 1.5em
-      font-size: 1.0em
+  width: 80%
+  font-size: 2em
+  margin-right: auto
+  margin-left: auto
+
+.form_field
+  label
+    width: 30%
+  input
+    float: right
+    width: 70%
+    margin-top: 1.3em
+    font-size: 0.5em
+
+#event_details
+  line-height: 2em
+  font-size: 1.5em
+
+#event_date, #undefined_time
+  margin-top: 0.6em
+  line-height: 1em
+
+  input
+    margin-top: 0.2em
+
+  .help
+    font-size: 0.5em
+    margin-top: -0.4em
+
+  &#undefined_time
+    margin-bottom: 1em

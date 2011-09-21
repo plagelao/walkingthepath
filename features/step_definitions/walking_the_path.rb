@@ -1,19 +1,18 @@
 # encoding: utf-8
 Given /^"([^"]*)" event the (next|past) week at ([^"]*) linked to "([^"]*)"$/ do |title, time, hour, link|
-  @date = next_week(hour)
-  @date = previous_week(hour) if time == 'past'
+  next_week(hour)
+  previous_week(hour) if time == 'past'
   event = Event.new
-  event.build_slot :datetime => @date
+  event.build_slot :datetime => @datetime
   event.title = title
   event.link = link
   event.save
 end
 
 Given /^"([^"]*)" event (today|tomorrow) at ([^"]*)$/ do |title, day, time|
-  days = day == 'today'? 0 : 1
-  @date = today_plus(days, time)
   event = Event.new
-  event.build_slot :datetime => @date
+  days = day == 'today'? 0 : 1
+  event.build_slot :datetime => today_plus(days, time)
   event.title = title
   event.link = 'http://Alink.es'
   event.save
@@ -48,8 +47,8 @@ Then /^I must see "([^"]*)" event at ([^"]*) the next week$/ do |event, hour|
   within('#events') do
     page.should have_content(event)
     page.should have_content(hour)
-    page.should have_content(@date.day.to_s)
-    page.should have_content(Slot::MONTHS[@date.month - 1])
+    page.should have_content(@datetime.day.to_s)
+    page.should have_content(Slot::MONTHS[@datetime.month - 1])
   end
 end
 
@@ -57,8 +56,8 @@ Then /^I must see "([^"]*)" event with an undefined time$/ do |event|
   within('#events') do
     page.should have_content(event)
     page.should have_content('---')
-    page.should have_content(@date.day.to_s)
-    page.should have_content(Slot::MONTHS[@date.month - 1])
+    page.should have_content(@datetime.day.to_s)
+    page.should have_content(Slot::MONTHS[@datetime.month - 1])
   end
 end
 
@@ -72,8 +71,8 @@ end
 Then /^I must receive a notification of "([^"]*)" event at ([^"]*) the next week$/ do |event, hour|
   page.should have_content(event)
   page.should have_content(hour)
-  page.should have_content(@date.day.to_s)
-  page.should have_content(@date.month.to_s)
+  page.should have_content(@datetime.day.to_s)
+  page.should have_content(Slot::MONTHS[@datetime.month - 1])
 end
 
 Then /^I must see an ask for the feed option$/ do

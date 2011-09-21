@@ -1,5 +1,6 @@
 #encoding: utf-8
 class EventsController < ApplicationController
+  include EventsHelper
 
   before_filter :assert_user_is_authenticated, :only => [:new, :create]
 
@@ -22,26 +23,24 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new params[:event]
-    @event.build_slot params[:slot]
+    slot = @event.build_slot params[:slot]
     if @event.save
       redirect_to events_path
     else
       flash[:notice] = []
       flash[:notice] << @event.errors[:title].first unless @event.errors[:title].empty?
       flash[:notice] << @event.errors[:link].first unless @event.errors[:link].empty?
-      flash[:notice] << @event.errors[:date].first unless @event.errors[:date].empty?
+      unless slot.valid?
+        flash[:notice] << slot.errors[:datetime].first unless slot.errors[:datetime].empty?
+      end
       render :new
     end
   end
 
   private
 
-  def user_logged_in?
-    not session[:user_id].blank?
-  end
-
   def assert_user_is_authenticated
-    redirect_to events_path unless user_logged_in?
+    redirect_to events_path unless user_identified?
   end
 
 end

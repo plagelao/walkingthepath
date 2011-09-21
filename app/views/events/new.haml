@@ -2,27 +2,29 @@
   - errors = notice.map(&:downcase).join(' Además, ')
   - errors[0] = errors.slice(0,1).capitalize
   #notice= errors
-#title
-  Nuevo Evento:
-= form_for(@event, :url => {:action => 'create'}) do |event_form|
-  #event_details
-    %p
-    = event_form.label(:title, "Evento:")
-    = event_form.text_field(:title)
+#new_event
+  #title
+    ¡Vas a crear un nuevo evento, mola!
+  = form_for(@event, :url => {:action => 'create'}) do |form|
+    #event_details
+      .form_field
+        = form.text_field(:title)
+        = form.label(:title, 'Título')
 
-    %p
-    = event_form.label(:link, "Enlace a la web del evento:")
-    = event_form.text_field(:link)
+      .form_field
+        = form.text_field(:link)
+        = form.label(:link, 'Web')
 
-    #when
-      ¿Cuándo?
-    #event_slot
-      = fields_for @event.slot do |slot_form|
-        = slot_form.label(:date, "Fecha del evento:")
-        #event_date
-          = datetime_select('slot', 'datetime', :use_month_numbers => true)
-        %p#undefined_time
-          = slot_form.check_box(:undefined_time)
-          = slot_form.label(:undefined_time, "no tengo ni idea de a que hora será...")
-    %p
-    = submit_tag('Crear Evento', :id => 'new_event')
+      #event_slot
+        = fields_for @event.slot do |slot_form|
+          #event_date
+            .form_field
+              = slot_form.text_field(:datetime_as_string, :value => @event.slot.datetime_as_string)
+              = slot_form.label(:datetime_as_string, 'Fecha y hora')
+              .help
+                (DD/MM/AAAA [HH:MM])
+          #undefined_time
+            .reverse_form_field
+              = slot_form.check_box(:undefined_time)
+              = slot_form.label(:undefined_time, 'no tengo ni idea de a que hora será...')
+    = form.submit('Crear Evento')

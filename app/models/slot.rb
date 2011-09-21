@@ -39,6 +39,7 @@ class Slot < ActiveRecord::Base
 
   def datetime_as_string
     return '' unless datetime
+    return datetime.to_s(:without_time) if undefined_time
     datetime.to_s(:walking)
   end
 

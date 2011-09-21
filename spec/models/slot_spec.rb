@@ -58,6 +58,10 @@ describe Slot do
       it 'does not know the time' do
         slot.time.should == '---'
       end
+
+      it 'date as string returns the right format' do
+        slot.datetime_as_string.should == '02/01/2011'
+      end
     end
   end
 

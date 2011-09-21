@@ -1,9 +1,14 @@
 #encoding: utf-8
-def next_week(time = "19:30")
+def next_week_with_undefined_time
+  @undefined_time = true
+  today_plus(7, '00:00')
+end
+
+def next_week(time)
   today_plus(7, time)
 end
 
-def previous_week(time = "19:30")
+def previous_week(time)
   today_plus(-7, time)
 end
 
@@ -17,7 +22,6 @@ def create_event event
   set_title_as event[:title] if event.has_key?(:title)
   set_link_as event[:link] if event.has_key?(:link)
   set_datetime_as event[:datetime]
-  set_undefined_time if event[:undefined_time]
   click_button('Crear Evento')
 end
 
@@ -39,12 +43,12 @@ def set_link_as link
 end
 
 def set_datetime_as datetime
-  fill_in('slot_datetime_as_string', :with => datetime.to_s(:walking))
+  if @undefined_time
+    fill_in('slot_datetime_as_string', :with => datetime.to_s(:without_time))
+  else
+    fill_in('slot_datetime_as_string', :with => datetime.to_s(:walking))
+  end
   @datetime = datetime
-end
-
-def set_undefined_time
-  check('slot_undefined_time')
 end
 
 def event_title

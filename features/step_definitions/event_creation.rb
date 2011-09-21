@@ -24,7 +24,7 @@ end
 When /^I create "([^"]*)" event with an undefined time$/ do |title|
   create_event(:title => title,
                :link => 'http://Alink.es',
-               :datetime => next_week,
+               :datetime => next_week_with_undefined_time,
                :undefined_time => true)
 end
 
